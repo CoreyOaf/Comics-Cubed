@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Comics Cubed</title>
+	 
+	<!-- CSS -->
+	<link rel="stylesheet" href= "style/marketplace.css" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="icon" href="images/comicscubed.ico" type="image/x-icon" title="Comics Cubed logo">
+	<script src="script/home_functions.js" defer></script>
+    <script src="script/sort-items.js"></script>
+  </head>
+  <body>
+	<nav>
+		<img src="images/comicscubed.png" alt="Comics Cubed Logo">
+		<div id="nav_brand"><b>Comics<sup>3</sup></b></div>
+		<div class="navbar">
+			<a href="/">Home</a> 
+			<a href="/Marketplace">Marketplace</a>
+			<a href="/Newsletter">Newsletter</a>
+			<a href="/Events">Events</a>
+			<a href="/AboutUs">About Us</a>
+
+			<a class="search-container">
+			<input type="text" placeholder="Search.." name="search">
+			<button type="submit"><i class="fa fa-search"></i></button>
+			</a>
+		<a class="cart-button">View Cart
+			<svg xmlns="cart.png" width="20px" height="20px" fill="lawngreen" class="bi bi-cart" viewBox="0 0 16 16">
+				<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+				</svg>
+		</a>
+		</div>	
+	</nav>
+	<div class="wrapper">
+        <h1><i>Current Inventory</i></h1>
+        <label for="sort">Sort by:</label>
+        <select id="sort" onchange="sortItems()">
+            <option value="price">Price</option>
+            <option value="title">Title</option>
+        </select>
+        <div id="row">
+            <div class="item">
+                <img src="images/amazingspiderman.jpeg"  alt="Item 1"> 
+                <h2>Amazing Fantasy #15</h2>
+                <p>Universe: Marvel</p>
+                <p>Year: 1962</p>
+		        <p>The First Appearance of the Amazing Spider-Man! When young<br>
+                    Peter Parker gains remarkable abilities from a radioactive<br>
+                    spider, he must step up and try to become a hero — while also<br>
+                    dealing with the fantastic pressures of an everyday teenager!<br>
+                     For with great power, there must also come great responsibility!<br></p>
+		        <p class="price">Price: $3.99</p> 
+            </div>
+    
+            <div class="item">
+                <img src="images/captainamerica.jpeg"  alt="Item 2">
+                <h2>Captain America #695</h2>
+                <p>Universe: Marvel</p>
+                <p>Year: 2017</p>
+		        <p>HOME OF THE BRAVE. Part 1. HOME OF THE BRAVE begins<br>
+                    - and Steve Rogers is back in action in the red-white-and-blue!<br>
+                    Steve begins a journey across America to restore his tarnished<br>
+                    reputation - and the dangers he encounters along the way are<br>
+                    unlike any he's faced before!</p>
+		        <p class="price">Price:$3.99 </p>
+            </div>
+
+            <div class="item">
+                <img src="images/avengers.jpeg"  alt="Item 3">
+                <h2>Avengers #75</h2>
+                <p>Universe: Marvel</p>
+                <p>Year: 1963</p>
+		        <p>Quicksilver returns to the Avengers Mansion, but not to rejoin<br>
+                    the team! After an initial miscommunication with Yellowjacket<br>
+                    and Wasp, Pietro reveals that his sister, the Scarlet Witch, has<br>
+                    been kidnapped after abusing black magic.</p>
+		        <p class="price">Price:$3.99 </p>
+            </div>
+        </div>
+        <div id="row">
+            <div class="item">
+                <img src="images/Batman-Detective.jpeg" alt="Item 4">
+                <h2>BATMAN: The Detective #1</h2>
+                <p>Universe: DC</p>
+                <p>Year: 2021</p>
+		        <p>A horrific tragedy in the United Kingdom sends a very personal<br>
+                    and deadly message to the Dark Knight—one that will draw Batman<br>
+                    out of Gotham City to investigate! From the moment he lands in Europe,<br>
+                    Batman will face a difficult investigation and unheard-of adversaries<br>
+                    and find the assistance of a partner once more—all in the hunt for the<br>
+                    villain known as Equilibrium! New villains! New allies! A thrilling overseas<br>
+                    adventure begins for the Dark Knight!.</p>
+		        <p class="price">Price:$3.99 </p>
+
+            </div>
+            <div class="item">
+                <img src="images/doctor-strange.jpeg" alt="Item 5">
+                <h2>STRANGE TALES: Doctor Strange #156</h2>
+                <p>Universe: Marvel</p>
+                <p>Year: 1951</p>
+		        <p>In order to vanquish the unspeakable Umar, Dr. Strange has<br>
+                    liberated Zom from an imprisonment of ages!</p>
+		        <p class="price">Price:$3.99 </p>
+            </div>
+
+            <div class="item">
+                <img src="images/superman-and-the-flash.jpeg" alt="Item 6">
+                <h2>DC COMICS PRESENTS<br>Superman And The Flash</h2>
+                <p>Universe: DC</p>
+                <p>Year: 1978</p>
+		        <p>Superman and the Flash find themselves on opposite sides<br>
+                    when they become "super bounty hunters."</p>
+		        <p class="price">Price:$3.99 </p>
+
+            </div>
+                </div>
+            </div>
+            <section>
+                <h1><i>Can't Find It? </i></h1>
+                <p>To make an inquiry, visit our about page.</p>
+            </section>
+			<footer>
+				Copyright &copy; <span id="year"></span> Comics Cubed
+			</footer>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>

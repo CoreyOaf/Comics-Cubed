@@ -1,0 +1,16 @@
+{
+  "name": "projectmilestone",
+  "version": "1.0.0",
+  "description": "Comics Cubed website for project milestone 1 using HTML, CSS, and NodeJs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Corey Oaf, Hannah Brumfiel, Jacob Batchelor, Jordan Riggs",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
+}
