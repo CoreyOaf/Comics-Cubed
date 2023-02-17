@@ -12,5 +12,13 @@
   "dependencies": {
     "express": "^4.18.2",
     "mysql": "^2.18.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoreyOaf/Comics-Cubed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CoreyOaf/Comics-Cubed/issues"
+  },
+  "homepage": "https://github.com/CoreyOaf/Comics-Cubed#readme"
 }
