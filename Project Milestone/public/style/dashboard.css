@@ -1,0 +1,49 @@
+body{
+    background-color: lightgrey;
+}
+
+h1{
+    padding-top: 50px;
+    font-family: Impact, sans-serif;
+}
+.row{
+    padding-bottom: 50px;
+}
+
+.pagination > li > a
+{
+    background-color: white;
+    color: lawngreen;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: lawngreen;
+    border: solid 1px lawngreen; 
+}
+
+.pagination > .active > a:hover
+{
+    background-color: lawngreen;
+    border: solid 1px lawngreen;
+}
+
+footer{
+    text-align: center;
+}
+
+footer img{
+    width: 100px;
+    height: 100px;
+}
