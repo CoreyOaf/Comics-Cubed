@@ -12,8 +12,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="icon" href="images/comicscubed.ico" type="image/x-icon" title="Comics Cubed logo">
-	<script src="script/home_functions.js" defer></script>
-    <script src="script/sort-items.js"></script>
+	<script src="./script/home_functions.js" defer></script>
+    <script src="./script/sort-items.js"></script>
     <style>
         #nav_brand{
 			color: black;
@@ -38,7 +38,16 @@
             color: red;
             display:inline; 
             vertical-align:middle;
-  }
+        }
+
+        .mode {
+    		float:right;
+    		padding-bottom: 15px;
+    		margin-top: -5px;
+			margin-right: 10px;
+			font-family: "Bangers", sans-serif;
+			font-size: 30px;
+  		}
     </style>
   </head>
   <body>
@@ -62,6 +71,10 @@
 				</svg>
 		</a>
 		</div>	
+        <div class="mode">
+			Dark mode:             
+			<span class="change">OFF</span>
+		</div>
 	</nav>
 	<div class="wrapper">
         <div class="top">

@@ -185,6 +185,31 @@ nav img{
     outline: 3px solid lawngreen;
   }
 
+  .change {
+    cursor: pointer;
+    border: 1px solid #555;
+    border-radius: 40%;
+    width: 20px;
+    text-align: center;
+    padding-left: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 7px;
+    margin-left: 8px;
+    background-color: black;
+    color: white;
+  }
+
+  .change:hover {
+    color: #555;
+  }
+
+  .dark{
+    background-color: #666;
+    color: #e6e6e6;
+  }
+
+
   .homeImagesDIV {
     width: 95%;
     margin-right: auto;
