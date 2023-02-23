@@ -11,7 +11,7 @@ nav img{
     height: 90px; 
     float: left;
     padding-top: 10px;
-    margin-top: 5px;
+    margin-top: 10px;
  }
 
  #nav_brand{
@@ -45,7 +45,7 @@ nav img{
  }
 
  .navbar a:hover{
-    background-color: lightgrey;
+    color: lightgrey;
     text-decoration: none;
  }
 
@@ -55,13 +55,13 @@ nav img{
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
-    background-color: #ddd;
+    background-color: lawngreen;
     font-size: 17px;
     border: none;
     cursor: pointer;
   }
   .navbar .search-container button:hover {
-    background: #ccc;
+    background-color: green;
   }
 
   .search-container input{
@@ -85,8 +85,8 @@ nav img{
     width: 33%;
   }
   .item img {
-    max-width: 400px;
-    max-height: 500px;
+    max-width: 300px;
+    max-height: 400px;
     height: auto;
     width: 100%;
     margin-right: 40px;
@@ -94,6 +94,7 @@ nav img{
 }
   #row{
     display: flex;
+    justify-content: center;
   }
 
   footer{
@@ -101,18 +102,18 @@ nav img{
     font-size: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
+  }
+
+  footer img{
+    width: 100px;
+    height: 100px;
+}
+
+  .wrapper{
     border-top: 5px solid black;
+    border-bottom: 5px solid black;
     outline: 3px solid lawngreen;
   }
-
-  .wrapper h1{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 35px;
-    color: black;
-    padding-left: 10px;
-
-  }
-
   .row button{
     height: 10px;
   }
@@ -121,18 +122,31 @@ nav img{
     padding-left: 20px;
   }
 
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  
+  .pagination a.active {
+    background-color: lawngreen;
+    color: white;
+  }
+  
+  .pagination a:hover:not(.active) {background-color: #ddd;}
+
   section{
+    border-top: 5px solid black;
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
-  }
-
-  section h1{
-    font-size: 35px;
-    font-family: Impact, sans-serif;
-    color: red;
-    display:inline; 
-    vertical-align:middle;
   }
 
   section p{

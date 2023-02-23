@@ -7,40 +7,30 @@ var viewCartButton = document.querySelector('.cart-button');//.style.cursor = "p
 
   document.getElementById("year").innerHTML = new Date().getFullYear();
 
-  // Get the newsletter link and the modal overlay
-const newsletterLink = document.getElementById('newsletter-link');
-const modalOverlay = document.querySelector('.modal-overlay');
-const modalCloseButton = document.querySelector('.modal-close');
-// Add a click event listener to the newsletter link
-newsletterLink.addEventListener('click', function(event) {
-  event.preventDefault(); // Prevent the default link behavior
-  $('.modal-overlay').show(); // Show the modal
-});
+ // Get the modal
+var modal = document.getElementById("modal-overlay");
 
-// Add a click event listener to the close button
-modalCloseButton.addEventListener('click', function() {
-  modalOverlay.style.display = 'block'; // Hide the modal
-});
+// Get the link that opens the modal
+var btn = document.getElementById("myLink");
 
-function validateEmail() {
-  const emailInput = document.getElementById('email');
-  const emailValue = emailInput.value.trim();
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("modal-close")[0];
 
-  if (!emailValue) {
-    alert('Please enter an email address');
-    return false;
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(emailValue)) {
-    alert('Please enter a valid email address');
-    return false;
-  }
-
-  return true;
+// When the user clicks the button, open the modal 
+if (btn != null) {
+btn.onclick = function() {
+  modal.style.display = "block";
+}
 }
 
-function openModal() {
-  var modal = document.querySelector('.modal-overlay');
-  modal.style.display = "block";
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 }

@@ -6,6 +6,7 @@ var items = Array.from(row.querySelectorAll(".item"));
 
 // Convert items NodeList to array for sorting
 var itemsArr = [];
+console.log (items);
 for (var i = 0; i < items.length; i++) {
   itemsArr.push(items[i]);
 }

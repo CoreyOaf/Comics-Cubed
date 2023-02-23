@@ -7,27 +7,61 @@
     <title>Comics Cubed</title>
 	 
 	<!-- CSS -->
-	<link rel="stylesheet" href= "style/home.css" type="text/css">
+	<link rel="stylesheet" href= "./style/home.css" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="icon" href="images/comicscubed.ico" type="image/x-icon" title="Comics Cubed logo">
-	<script src="script/home_functions.js" defer></script>
+	<link rel="icon" href="./images/comicscubed.ico" type="image/x-icon" title="Comics Cubed logo">
+	<script src="./script/home_functions.js" defer></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<style>
+		#nav_brand{
+			color: black;
+    		text-shadow: 3px 2.25px 0px lawngreen;
+    		font-family: "Bangers", sans-serif;
+    		font-size: 50px;
+    		padding-top: 30px;
+    		padding-left: 30px;
+    		padding-right: 50px;
+    		float: left;
+		}
+		.carousel-caption {
+   		position: absolute;
+    	top: 10;
+    	left: 20;
+    	right: 0;
+    	bottom: 10;
+    	background-color: red;
+    	color: white;
+    	text-shadow: -1px 1px 2px #000,
+    	1px 2px 6px #000,
+    	1px -1px 0 #000,
+    	-1px -1px 0 #000;
+    	text-align: center;
+    	font-size: 35px;
+    	font-family: "Bangers", sans-serif;
+    	width: 400px;
+ 	 	}
+	</style>
   </head>
   <body>
 	<nav>
-		<img src="images/comicscubed.png" alt="Comics Cubed Logo">
-		<div id="nav_brand"><b>Comics<sup>3</sup></b></div>
+		<img src="./images/comicscubed.png" alt="Comics Cubed Logo">
+		<div id="nav_brand"><b>Comics<sup> 3</sup></b></div>
 		<div class="navbar">
 			<a href="/">Home</a> 
 			<a href="/Marketplace">Marketplace</a>
-			<a href="#" id="newsletter-link" onclick="openModal()"> Newsletter</a>
+			<a href="#" id="myLink"> Newsletter</a>
 			<a href="/Events">Events</a>
 			<a href="/AboutUs">About Us</a>
-			<div class="modal-overlay">
+			<div id="modal-overlay" class="modal">
 				<div class="modal">
 				  <h2>Subscribe to our newsletter</h2>
-			<form action="submit_newsletter.php" method="post" onsubmit="return validateEmail();">
+				  <p>Information about newsletter. Information about newsletter. Information about newsletter. <br>
+					 Information about newsletter. Information about newsletter. Information about newsletter. <br>
+					 Information about newsletter. Information about newsletter. Information about newsletter. <br>
+					</p>
+			<form  onsubmit="return validateEmail();">
 				<input type="email" name="email" id="email" placeholder="Enter your email address">
 				<button type="submit">Subscribe</button>
 			  </form>
@@ -57,21 +91,21 @@
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner">
 			  <div class="item active">
-				<img src="images/green.png" alt="Image 1">
+				<img src="./images/green.png" alt="Image 1">
 				<div class="carousel-caption">
 					<p>Thousands of Comics<br>and Collectibles!!</p>
 				</div>
 			  </div>
 	
 			  <div class="item">
-				<img src="images/black.png" alt="Image 2">
+				<img src="./images/black.png" alt="Image 2">
 				<div class="carousel-caption">
 					<p>Weekly New Items!!</p>
 				</div>
 			  </div>
 	
 			  <div class="item">
-				<img src="images/red.png" alt="Image 3">
+				<img src="./images/red.png" alt="Image 3">
 				<div class="carousel-caption">
 					<p>Friendliest shop<br>in Kokomo!!</p>
 				</div>
@@ -89,28 +123,23 @@
 			  <span class="sr-only">Next</span>
 			</a>
 		  </div>
-		  <div class="row">
-        <div class="col">
-                <img src="./images/wordBubble1.png" width="500px" height="500px" alt="Buy Selling and Trading! Word Bubble">
-        </div>
-
-        <div class="col">
-            <img src="./images/wordBubble2.png" width="500px" height="500px" alt="New Inventory Word Bubble">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <img src="./images/wordBubble3.png" width="500px" height="500px" alt="Order Ahead! Word Bubble">
-        </div>
-        <div class="col">
-                <img src="./images/wordBubble4.png" width="500px" height="500px" alt="Order Ahead! Word Bubble" />
-                </div>
-            </div>
-
+		  <div class = "homeImagesDIV">
+	
+			<table>
+				<tr>
+				  <td><a href="/Marketplace"><img class = "homeMenuImg" src="images/homeMenu1.png" alt="Buying! Word Bubble"></a></td>
+				  <td><a href="/AboutUs"><img class = "homeMenuImg" src="images/homeMenu2.png"  alt="Selling! Word Bubble"></a></td>
+				</tr>
+				<tr>
+					<td><a href="/Marketplace"><img class = "homeMenuImg" src="images/homeMenu3.png" alt="Order Ahead! Word Bubble"></a></td>
+				  <td><a href="/AboutUs"><img class = "homeMenuImg" src="images/homeMenu4.png" alt="Locally Owned! Word Bubble"></a></td>
+				</tr>
+			 </table>
+			 </div>
 			<footer>
-				Copyright &copy; <span id="year"></span> Comics Cubed
+				Copyright &copy; <span id="year"></span> Comics Cubed | All Rights Reserved. <br>
+				<img src="./images/comicscubed.png" alt="Comics Cubed Logo">
 			</footer>
-	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </body>

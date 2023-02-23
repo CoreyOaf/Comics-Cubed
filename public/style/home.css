@@ -1,3 +1,6 @@
+body{
+  margin-right: -2;
+}
 .icon {
     padding-left: 25px;
     background: url("./images/search-interface-symbol.png") no-repeat left;
@@ -11,18 +14,8 @@ nav img{
     height: 90px; 
     float: left;
     padding-top: 10px;
-    margin-top: 5px;
- }
-
- #nav_brand{
-    color: black;
-    text-shadow: 3px 2.25px 0px lawngreen;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 40px;
-    padding-top: 35px;
-    padding-left: 30px;
-    padding-right: 60px;
-    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
  }
 
  .navbar{
@@ -32,8 +25,7 @@ nav img{
     padding-bottom: 20px;
     padding-left: 40px;
     background-color: black;
-    border-radius: 30px;
-    perspective: 1px;
+    border-radius: 60px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
  }
@@ -45,62 +37,44 @@ nav img{
  }
 
  .navbar a:hover{
-    background-color: lightgrey;
+    color: lightgrey;
     text-decoration: none;
  }
 
- /* Style the modal overlay */
-.modal-overlay {
-    display: none; /* Hide the modal by default */
-    position: fixed; /* Position the modal over the entire page */
-    z-index: 10; /* Set the z-index to make the modal appear on top of other elements */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5); /* Add a semi-transparent black background to the overlay */
-  }
-
-  /* Style the modal box */
-.modal {
-    position: relative; /* Position the modal box relative to the overlay */
-    margin: 10% auto; /* Center the modal box vertically and horizontally */
-    padding: 20px;
-    width: 500px;
-    max-width: 90%;
-    background-color: white;
-    border-radius: 5px;
-    display: none;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-  }
-
-  .modal h2 {
-    margin-top: 0;
-  }
-  
-  .modal input {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 100%;
-  }
-
-  .modal button {
-    background-color: lawngreen;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  /* Style the close button */
-  .modal-close {
-    position: absolute; /* Position the close button relative to the modal box */
-    top: 10px;
-    right: 10px;
-  }
+ #modal-overlay{
+	display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+  height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+ }
+.modal-content{
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+}
+.modal-close{
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight:  bold;
+}
+.modal-close:hover, .modal-close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+#myLink{
+	color: white
+}
 
   .navbar .search-container button {
     margin-left: -7px;
@@ -108,13 +82,13 @@ nav img{
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
-    background-color: #ddd;
+    background-color: lawngreen;
     font-size: 17px;
     border: none;
     cursor: pointer;
   }
   .navbar .search-container button:hover {
-    background: #ccc;
+    background-color: lawngreen;
   }
 
   .search-container input{
@@ -128,9 +102,8 @@ nav img{
   }
   
   .carousel {
-    width: 90%;
+    width: 100%;
     margin-bottom: 20px;
-    margin-left: 75px;
   }
   
   .carousel-control {
@@ -193,24 +166,6 @@ nav img{
     margin: 1
   }
 
-  .carousel-caption {
-    position: absolute;
-    top: 10;
-    left: 0;
-    right: 0;
-    bottom: 10;
-    background-color: red;
-    color: white;
-    text-shadow: -1px 1px 2px #000,
-    1px 2px 6px #000,
-    1px -1px 0 #000,
-    -1px -1px 0 #000;
-    text-align: center;
-    font-size: 35px;
-    font-family: Impact, sans-serif;
-    width: 400px;
-  }
-
   .col{
     flex: 50%;
     padding-left: 100px;
@@ -219,12 +174,37 @@ nav img{
     display: flex;
   }
 
+  #comicbookDescription{
+    overflow:auto;
+    scrollbar-base-color:lightgrey;
+  }
+
+  .wrapper{
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    outline: 3px solid lawngreen;
+  }
+
+  .homeImagesDIV {
+    width: 95%;
+    margin-right: auto;
+    margin-left: auto;
+    float: center;
+  }
+  .homeMenuImg {
+    width: 100%;
+
+  }
+
   footer{
     text-align: center;
     font-size: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-top: 5px solid black;
-    outline: 3px solid lawngreen;
   }
+
+  footer img{
+    width: 100px;
+    height: 100px;
+}
   

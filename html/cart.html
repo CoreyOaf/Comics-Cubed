@@ -4,11 +4,11 @@
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Comics Cubed</title>
+    <title>Comics Cubed Cart</title>
 	 
 	<!-- CSS -->
-	<link rel="stylesheet" href= "style/home.css" type="text/css">
-	<link rel="stylesheet" href= "style/cart.css" type="text/css">
+    <link rel="stylesheet" href= "style/cart.css" type="text/css">
+   <link rel="stylesheet" href= "style/home.css" type="text/css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="icon" href="images/comicscubed.ico" type="image/x-icon" title="Comics Cubed logo">
@@ -16,6 +16,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
+<header>
 	<nav>
 		<img src="images/comicscubed.png" alt="Comics Cubed Logo">
 		<div id="nav_brand"><b>Comics<sup>3</sup></b></div>
@@ -35,84 +36,70 @@
 			  <button class="modal-close">Close</button>
   </div>
 </div>
-			<a class="search-container">
-			<input type="text" placeholder="Search.." name="search">
-			<button type="submit"><i class="fa fa-search"></i></button>
-			</a>
-		<a class="cart-button">View Cart
-			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="bi bi-cart" viewBox="0 0 16 16">
-				<path fill="lawngreen" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-				</svg>
-		</a>
 		</div>	
 	</nav>
-	
-    <div class=”Cart-Container”>
-
-        <div class=”Header”>
-            <h3 class=”Heading”>Shopping Cart</h3>
-            <h5 class=”Action”>Remove all</h5>
+    </header>
+        <div class ="wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Image</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Amazing Fantasy #15</td>
+                        <td>$3.99</td>
+                        <td><input type="number" value="1" min="1"></td>
+                        <td><img src="images/amazingspiderman.jpeg" alt="Item 1"></td>
+                        <td>$3.99</td>
+                    </tr>
+                    <tr>
+                        <td>Avengers #75</td>
+                        <td>$3.99</td>
+                        <td><input type="number" value="2" min="1"></td>
+                        <td><img src="images/avengers.jpeg" alt="Item 2"></td>
+                        <td>7.98</td>
+                    </tr>
+                    <tr>
+                        <td>BATMAN #23.1: THE JOKER</td>
+                        <td>$3.99</td>
+                        <td><input type="number" value="1" min="1"></td>
+                        <td><img src="images/joker.jpeg" alt="Item 3"></td>
+                        <td>$3.99</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Subtotal</td>
+                        <td>$15.96</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Taxes</td>
+                        <td>$5.00</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Total</td>
+                        <td>$17.08</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="checkout">
+                <a href="/Marketplace">Continue Shopping</a>
+                <a href="#">Checkout</a>
             </div>
 
-            <div class=”Cart-Items”>
-                <div class=”image-box”>
-                <img/>
-                </div>
-                <div class=”about”>
-                <h1 class=”title”>Item 1</h1>
-                <h3 class=”subtitle”>Item 1 information</h3>
-                <img/>
-                </div>
-                <div class=”counter”></div>
-                <div class=”prices”></div>
-                </div>
-                <div class=”counter”>
-                    <div class=”btn”>+</div>
-                    <div class=”count”>2</div>
-                    <div class=”btn”>-</div>
-                    </div>
-                <div class=”prices”>
-                    <div class=”amount”>$2.99</div>
-                    <div class=”save”><u>Save for later</u></div>
-                    <div class=”remove”><u>Remove</u></div>
-                </div>
-                <div class=”Cart-Items”>
-                    <div class=”image-box”>
-                    <img/>
-                    </div>
-                    <div class=”about”>
-                    <h1 class=”title”>Item 1</h1>
-                    <h3 class=”subtitle”>Item 1 information</h3>
-                    <img/>
-                    </div>
-                    <div class=”counter”></div>
-                    <div class=”prices”></div>
-                    </div>
-                    <div class=”counter”>
-                        <div class=”btn”>+</div>
-                        <div class=”count”>2</div>
-                        <div class=”btn”>-</div>
-                        </div>
-                    <div class=”prices”>
-                        <div class=”amount”>$2.99</div>
-                        <div class=”save”><u>Save for later</u></div>
-                        <div class=”remove”><u>Remove</u></div>
-                    </div>
-                <hr> 
-                    <div class=”checkout”>
-                    <div class=”total”>
-                    <div>
-                    <div class=”Subtotal”>Sub-Total</div>
-                    <div class=”items”>2 items</div>
-                    </div>
-                    <div class=”total-amount”>$6.18</div>
-                    </div>
-                    <button class=”button”>Checkout</button>
-                </div>
-    </div>
 
+
+
+        </div>
 			<footer>
-				Copyright &copy; <span id="year"></span> Comics Cubed
+				Copyright &copy; <span id="year"></span> Comics Cubed | All Rights Reserved. <br>
+                <img src="./images/comicscubed.png" width="50px" height="50px" alt="Comics Cubed Logo">
 			</footer>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

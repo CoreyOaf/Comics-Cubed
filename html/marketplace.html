@@ -8,16 +8,43 @@
 	 
 	<!-- CSS -->
 	<link rel="stylesheet" href= "style/marketplace.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="icon" href="images/comicscubed.ico" type="image/x-icon" title="Comics Cubed logo">
 	<script src="script/home_functions.js" defer></script>
     <script src="script/sort-items.js"></script>
+    <style>
+        #nav_brand{
+			color: black;
+    		text-shadow: 3px 2.25px 0px lawngreen;
+    		font-family: "Bangers", sans-serif;
+    		font-size: 50px;
+    		padding-top: 30px;
+    		padding-left: 40px;
+    		padding-right: 50px;
+    		float: left;
+        }
+        .top h1{
+            font-family: "Bangers", sans-serif;
+            font-size: 35px;
+            color: black;
+            padding-left: 10px;
+		}
+
+        section h1{
+            font-size: 35px;
+            font-family: "Bangers", sans-serif;
+            color: red;
+            display:inline; 
+            vertical-align:middle;
+  }
+    </style>
   </head>
   <body>
 	<nav>
 		<img src="images/comicscubed.png" alt="Comics Cubed Logo">
-		<div id="nav_brand"><b>Comics<sup>3</sup></b></div>
+		<div id="nav_brand"><b>Comics<sup> 3</sup></b></div>
 		<div class="navbar">
 			<a href="/">Home</a> 
 			<a href="/Marketplace">Marketplace</a>
@@ -37,12 +64,15 @@
 		</div>	
 	</nav>
 	<div class="wrapper">
+        <div class="top">
         <h1><i>Current Inventory</i></h1>
         <label for="sort">Sort by:</label>
         <select id="sort" onchange="sortItems()">
             <option value="price">Price</option>
             <option value="title">Title</option>
         </select>
+        </div>
+
         <div id="row">
             <div class="item">
                 <img src="images/amazingspiderman.jpeg"  alt="Item 1"> 
@@ -74,7 +104,7 @@
                 <img src="images/avengers.jpeg"  alt="Item 3">
                 <h2>Avengers #75</h2>
                 <p>Universe: Marvel</p>
-                <p>Year: 1963</p>
+                <p>Year: 1970</p>
 		        <p>Quicksilver returns to the Avengers Mansion, but not to rejoin<br>
                     the team! After an initial miscommunication with Yellowjacket<br>
                     and Wasp, Pietro reveals that his sister, the Scarlet Witch, has<br>
@@ -82,6 +112,7 @@
 		        <p class="price">Price:$3.99 </p>
             </div>
         </div>
+
         <div id="row">
             <div class="item">
                 <img src="images/Batman-Detective.jpeg" alt="Item 4">
@@ -102,7 +133,7 @@
                 <img src="images/doctor-strange.jpeg" alt="Item 5">
                 <h2>STRANGE TALES: Doctor Strange #156</h2>
                 <p>Universe: Marvel</p>
-                <p>Year: 1951</p>
+                <p>Year: 1967</p>
 		        <p>In order to vanquish the unspeakable Umar, Dr. Strange has<br>
                     liberated Zom from an imprisonment of ages!</p>
 		        <p class="price">Price:$3.99 </p>
@@ -119,15 +150,57 @@
 
             </div>
                 </div>
+        
+                <div id="row">
+                    <div class="item">
+                        <img src="images/green-lantern.jpeg" alt="Item 7">
+                        <h2>Green Lantern #1</h2>
+                        <p>Universe: DC</p>
+                        <p>Year: 1990</p>
+                        <p>The long awaited return of DC's greatest cosmic heroes! First Issue!</p>
+                        <p class="price">Price:$3.99 </p>
+        
+                    </div>
+                    <div class="item">
+                        <img src="images/hawkeye.jpeg" alt="Item 8">
+                        <h2>Avengers #223</h2>
+                        <p>Universe: Marvel</p>
+                        <p>Year: 1982</p>
+                        <p>Hawkeye must face his past after an old circus colleague is<br>
+                            threatened by Taskmaster. Featuring Scott Lang as Ant-Man!</p>
+                        <p class="price">Price:$3.99 </p>
+                    </div>
+        
+                    <div class="item">
+                        <img src="images/joker.jpeg" alt="Item 9">
+                        <h2>BATMAN #23.1: THE JOKER</h2>
+                        <p>Universe: DC</p>
+                        <p>Year: 2013</p>
+                        <p>The Joker has FOREVER been the face of EVIL in the DC Universe…<br>
+                           but what led him on this devious path of treachery? Andy Kubert pens<br>
+                            this early adventure showcasing the maniacal exploits of the Crown Prince of Gotham—The JOKER!</p>
+                        <p class="price">Price:$3.99 </p>
+        
+                    </div>
+                        </div>
+                        <div class="pagination">
+                            <a href="#">&laquo;</a>
+                            <a class="active" href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <a href="#">&raquo;</a>
+                          </div>
+                <section>
+                    <h1><i>Can't Find It? </i></h1>
+                    <p>To make an inquiry, visit our about page.</p>
+                </section>
             </div>
-            <section>
-                <h1><i>Can't Find It? </i></h1>
-                <p>To make an inquiry, visit our about page.</p>
-            </section>
 			<footer>
-				Copyright &copy; <span id="year"></span> Comics Cubed
+				Copyright &copy; <span id="year"></span> Comics Cubed | All Rights Reserved.<br>
+                <img src="./images/comicscubed.png" width="50px" height="50px" alt="Comics Cubed Logo">
 			</footer>
-	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </body>
