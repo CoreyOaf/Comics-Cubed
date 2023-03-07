@@ -232,4 +232,29 @@ nav img{
     width: 100px;
     height: 100px;
 }
-  
+.carousel-caption {
+  position: absolute;
+ top: 10;
+ left: 20;
+ right: 0;
+ bottom: 10;
+ background-color: red;
+ color: white;
+ text-shadow: -1px 1px 2px #000,
+ 1px 2px 6px #000,
+ 1px -1px 0 #000,
+ -1px -1px 0 #000;
+ text-align: center;
+ font-size: 35px;
+ font-family: "Bangers", sans-serif;
+ width: 400px;
+}
+
+.mode {
+ float:right;
+ padding-bottom: 15px;
+ margin-top: -5px;
+margin-right: 10px;
+font-family: "Bangers", sans-serif;
+font-size: 30px;
+}

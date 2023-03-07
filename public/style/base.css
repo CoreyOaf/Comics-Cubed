@@ -1,0 +1,10 @@
+#nav_brand{
+    color: black;
+    text-shadow: 3px 2.25px 0px lawngreen;
+    font-family: "Bangers", sans-serif;
+    font-size: 50px;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 50px;
+    float: left;
+}
