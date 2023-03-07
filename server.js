@@ -12,6 +12,9 @@ function onHttpStart(){
 app.get("/", (req,res) =>{
     res.sendFile(path.join(__dirname, "html/Home.html"));
 });
+app.get("/Home", (req,res) =>{
+    res.sendFile(path.join(__dirname, "html/Home.html"));
+});
 app.get("/Marketplace", (req,res) =>{
     res.sendFile(path.join(__dirname,"html/marketplace.html"));
 });
