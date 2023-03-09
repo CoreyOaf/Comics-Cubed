@@ -1,0 +1,178 @@
+.icon {
+    padding-left: 25px;
+    background: url("./images/search-interface-symbol.png") no-repeat left;
+    background-size: 20px;
+}
+nav{
+    overflow: hidden;
+}
+nav img{
+    width: 90px; 
+    height: 90px; 
+    float: left;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+ .navbar{
+    overflow: hidden;
+    margin-top: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    background-color: black;
+    border-radius: 30px;
+    perspective: 1px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+ }
+
+ .navbar a{
+    text-decoration: none;
+    color: white;
+    margin-right: 35px;
+ }
+
+ .navbar a:hover{
+    text-decoration: none;
+    color: lightgrey;
+ }
+
+ /* Style the modal overlay */
+.modal-overlay {
+    display: none; /* Hide the modal by default */
+    position: fixed; /* Position the modal over the entire page */
+    z-index: 10; /* Set the z-index to make the modal appear on top of other elements */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* Add a semi-transparent black background to the overlay */
+  }
+
+  /* Style the modal box */
+.modal {
+    position: relative; /* Position the modal box relative to the overlay */
+    margin: 10% auto; /* Center the modal box vertically and horizontally */
+    padding: 20px;
+    width: 500px;
+    max-width: 90%;
+    background-color: white;
+    border-radius: 5px;
+    display: none;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  }
+
+  .modal h2 {
+    margin-top: 0;
+  }
+  
+  .modal input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+  }
+
+  .modal button {
+    background-color: lawngreen;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Style the close button */
+  .modal-close {
+    position: absolute; /* Position the close button relative to the modal box */
+    top: 10px;
+    right: 10px;
+  }
+
+  .navbar .search-container button {
+    margin-left: -7px;
+    padding-bottom: 8px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: lawngreen;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+  .navbar .search-container button:hover {
+    background: lawngreen;
+  }
+
+  .search-container input{
+    padding-bottom: 5px;
+    padding-top: 5px;
+  }
+
+  .cart-button{
+    float: right;
+    margin-top: 10px;
+  }
+
+  .col{
+    flex: 50%;
+    padding-left: 100px;
+  }
+  .row{
+    display: flex;
+  }
+
+  .change {
+    cursor: pointer;
+    border: 1px solid #555;
+    border-radius: 40%;
+    width: 20px;
+    text-align: center;
+    padding-left: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 7px;
+    margin-left: 8px;
+    background-color: black;
+    color: white;
+  }
+
+  .change:hover {
+    color: #555;
+  }
+
+  .dark{
+    background-color: #666;
+    color: #e6e6e6;
+  }
+
+  .wrapper h1{
+    font-family: "Bangers", sans-serif;
+    font-size: 35px;
+    color: black;
+    padding-left: 10px;
+    border-bottom: solid 4px #000000;
+}
+ .mode {
+      float:right;
+      padding-bottom: 15px;
+      margin-top: -5px;
+    margin-right: 10px;
+    font-family: "Bangers", sans-serif;
+    font-size: 30px;
+    }
+
+  footer {
+    text-align: center;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: solid 4px #81D65A;
+  }
+  
+  footer img{
+    width: 100px;
+    height: 100px;
+}
