@@ -14,17 +14,6 @@ nav img{
     margin-top: 10px;
  }
 
- #nav_brand{
-    color: black;
-    text-shadow: 3px 2.25px 0px lawngreen;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 40px;
-    padding-top: 35px;
-    padding-left: 30px;
-    padding-right: 60px;
-    float: left;
- }
-
  .navbar{
     overflow: hidden;
     margin-top: 20px;
@@ -180,3 +169,35 @@ nav img{
     display:inline; 
     vertical-align:middle;
   }
+
+  .top h1{
+    font-family: "Bangers", sans-serif;
+    font-size: 35px;
+    color: black;
+    padding-left: 10px;
+}
+
+section h1{
+    font-size: 35px;
+    font-family: "Bangers", sans-serif;
+    color: red;
+    display:inline; 
+    vertical-align:middle;
+}
+
+.mode {
+float:right;
+padding-bottom: 15px;
+margin-top: -5px;
+margin-right: 10px;
+font-family: "Bangers", sans-serif;
+font-size: 30px;
+}
+
+.marketplaceHeader{
+  width: 40%;
+}
+
+.marketplaceBanner{
+  width: 60%;
+}

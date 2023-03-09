@@ -52,6 +52,39 @@ tfoot td {
     background-color: #555;
 }
 
+.change {
+    cursor: pointer;
+    border: 1px solid #555;
+    border-radius: 40%;
+    width: 20px;
+    text-align: center;
+    padding-left: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 7px;
+    margin-left: 8px;
+    background-color: black;
+    color: white;
+  }
+
+  .change:hover {
+    color: #555;
+  }
+
+  .dark{
+    background-color: #666;
+    color: #e6e6e6;
+  }
+
+  .mode {
+    float:right;
+    padding-bottom: 15px;
+    margin-top: -5px;
+   margin-right: 10px;
+   font-family: "Bangers", sans-serif;
+   font-size: 30px;
+   }
+
 td img{
     width: 150px;;
     height: 200px;
@@ -59,13 +92,18 @@ td img{
     margin-top: 40px;
   }
 
+  .wrapper{
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    outline: 3px solid lawngreen;
+  }
+
 footer{
     text-align: center;
     font-size: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-top: 7px solid black;
-    outline: 3px solid lawngreen;
+    
   }
 
   footer img {

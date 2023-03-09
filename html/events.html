@@ -15,35 +15,6 @@
 	<link rel="icon" href="images/comicscubed.ico" type="image/x-icon" title="Comics Cubed logo">
 	<script src="script/home_functions.js" defer></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<style>
-		#nav_brand{
-			color: black;
-    		text-shadow: 3px 2.25px 0px lawngreen;
-    		font-family: "Bangers", sans-serif;
-    		font-size: 50px;
-    		padding-top: 30px;
-    		padding-left: 40px;
-    		padding-right: 50px;
-    		float: left;
-		}
-		.wrapper h1{
-    	font-size: 35px;
-    	text-align: center;
-    	font-family: "Bangers", sans-serif;
-    	color: black;
-		border-top: 5px solid lawngreen;
-		padding-top: 20px;
-		}
-
-		.mode {
-    		float:right;
-    		padding-bottom: 15px;
-    		margin-top: -5px;
-			margin-right: 10px;
-			font-family: "Bangers", sans-serif;
-			font-size: 30px;
-  		}
-	</style>
   </head>
   <body>
 	<nav>
@@ -52,7 +23,7 @@
 		<div class="navbar">
 			<a href="/">Home</a> 
 			<a href="/Marketplace">Marketplace</a>
-			<a href="#" id="newsletter-link" onclick="openModal()"> Newsletter</a>
+			<a href="/Newsletter">Newsletter</a>
 			<a href="/Events">Events</a>
 			<a href="/AboutUs">About Us</a>
 			<div class="modal-overlay">
@@ -82,14 +53,18 @@
 	</nav>
 	
 	<div class="wrapper">
-		<h1>Events Calendar</h1>
+		<img class = "eventsHeader" src="images/eventsHeader.png" alt="Events Header"><br>
 		<div class="calendar">
 			<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&showTitle=0&showNav=0&showPrint=0&showTabs=1&showCalendars=0&title=Events%20Calendar&src=Y19mMjIxZjFhYzIzOGVkZDg4MDUxNDA4MWJiNGQ3NDgzODk5MGE2NDQ4ZWIyMDhmOWY3ZmIzNDUyYTFlZDBkNjE2QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%237CB342&color=%230B8043"></iframe>
 			</div>
-        </div>
+			<section>
+			<a href="https://www.facebook.com/COMICSCUBED/"><img class = "eventsBanner" src="images/eventsBanner.png" alt="Events Banner"></a>
+			</section>
+		</div>
 
         <footer>
             Copyright &copy; <span id="year"></span> Comics Cubed | All Rights Reserved.<br>
+			<img src="./images/comicscubed.png" alt="Comics Cubed Logo">
         </footer>
             </div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
