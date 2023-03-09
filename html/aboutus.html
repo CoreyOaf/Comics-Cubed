@@ -44,25 +44,34 @@
 	</style>
   </head>
   <body>
+	<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Comics Cubed</title>
+	 
+	<!-- CSS -->
+	<link rel="stylesheet" href= "./style/base.css" type="text/css">
+	<link rel="stylesheet" href= "./style/home.css" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="icon" href="./images/comicscubed.ico" type="image/x-icon" title="Comics Cubed logo">
+	<script src="./script/home_functions.js" defer></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
 	<nav>
-		<img src="images/comicscubed.png" alt="Comics Cubed Logo">
-		<div id="nav_brand"><b>Comics <sup>3</sup></b></div>
+		<img src="./images/comicscubed.png" alt="Comics Cubed Logo">
+		<div id="nav_brand"><b>Comics<sup> 3</sup></b></div>
 		<div class="navbar">
 			<a href="/">Home</a> 
 			<a href="/Marketplace">Marketplace</a>
-			<a href="#" id="newsletter-link" onclick="openModal()"> Newsletter</a>
+			<a href="/Newsletter" id="myLink"> Newsletter</a>
 			<a href="/Events">Events</a>
 			<a href="/AboutUs">About Us</a>
-			<div class="modal-overlay">
-				<div class="modal">
-				  <h2>Subscribe to our newsletter</h2>
-			<form action="submit_newsletter.php" method="post" onsubmit="return validateEmail();">
-				<input type="email" name="email" id="email" placeholder="Enter your email address">
-				<button type="submit">Subscribe</button>
-			  </form>
-			  <button class="modal-close">Close</button>
-  </div>
-</div>
 			<a class="search-container">
 			<input type="text" placeholder="Search.." name="search">
 			<button type="submit"><i class="fa fa-search"></i></button>
@@ -79,31 +88,53 @@
 		</div>
 	</nav>
 
+	<div class="wrapper">
+		<img class = "aboutUsHeader" src="images/aboutUsHeader.png" alt="About Us Header"><br>	 
 	<div class="container">
-    <div class="wrapper">
-		<h1><i>About Us</i></h1>
-		<div class="row text-center">
-			 <div class="col-md-12">
-				<img class="introText" src="images/cCintroText.png" width="auto">
-	 
+		<div class="row">
+			 <div class="col-md-6">
+				<img class="aboutUsImages" src="images/welcomeKokomo.png" width="75%">
+				</div>
+			 <div class="col-md-5 text-block-para introInfo">
+				Hello! We are Comics Cubed- a locally owned and operated comic book shop right here in the heart
+			of Kokomo. Located downtown, our store has gained a reputation as a place to explore comics from all eras. In our store, 
+			there is no telling what you will find as our expansive inventory keeps growing. Visit us today!</div> 
+		   </div>
 			 </div>
+			 <div class="row bioInfo">
+			 <div class="col-md-4">
+					Our owner, Shawn, briefly attended Indiana University Kokomo for a business management degree. However, he soon found his calling as a full-time 
+				manager of a previous comic book shop here in Kokomo in the late 1980s. Fast forward to today, and he is the owner of Comics Cubed; 
+				his own comic book store. Being involved since 1989, Shawn has gained a lot of respect from his peers and customers alike as he has 
+				consistently provided a unique place for anyone to buy, trade, and sell comic books.</div>
+			<div class="col-md-3">
+				<img class="aboutUsImages" src="images/comicscubed.png" width="50%">
+		   </div>
 		</div>
-		<br>
-		<h1><i>Contact Information</i></h1>
-		   <div class="row text-center">
-			 <div class="col-md-12">
-				<img class="contactInfo" src="images/cCcontactInfo.png" width="auto">
-			 </div>
-		</div>
-			 
-			<footer>
-				Copyright &copy; <span id="year"></span> Comics Cubed | All Rights Reserved.<br>
-			</footer>
-	
-		</div>
-	</div>
 
+		<img class = "contactUsHeader" src="images/contactUsHeader.png" alt="Contact Us Header"><br>
+		<div class="container">
+			<div class="row">
+				 <div class="col-md-6">
+					<img class="aboutUsImages" src="images/inquiryBubble.png" width="75%">
+				 </div>
+				 <div class="col-md-6 text-block contactInfo">
+						<b>Phone Number:</b> +1 (765) 450-4126<br>
+						<br>
+						<b>Address:</b> 121 E Sycamore St Kokomo, IN 46901
+				</div> 
+			</div>	
+		<br>
+		<section>
+			<a href="https://www.facebook.com/COMICSCUBED/"><img class = "moreInfoBanner" src="images/moreInfoBanner.png" alt="Facebook Banner"></a>
+		</section>
+	</div>
+	</div>
+	<footer>
+		Copyright &copy; <span id="year"></span> Comics Cubed | All Rights Reserved.<br>
+		<img src="./images/comicscubed.png" alt="Comics Cubed Logo">
+	</footer>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  </body>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
 </html>

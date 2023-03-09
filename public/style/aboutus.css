@@ -38,59 +38,6 @@ nav img{
     color: lightgrey;
  }
 
- /* Style the modal overlay */
-.modal-overlay {
-    display: none; /* Hide the modal by default */
-    position: fixed; /* Position the modal over the entire page */
-    z-index: 10; /* Set the z-index to make the modal appear on top of other elements */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5); /* Add a semi-transparent black background to the overlay */
-  }
-
-  /* Style the modal box */
-.modal {
-    position: relative; /* Position the modal box relative to the overlay */
-    margin: 10% auto; /* Center the modal box vertically and horizontally */
-    padding: 20px;
-    width: 500px;
-    max-width: 90%;
-    background-color: white;
-    border-radius: 5px;
-    display: none;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-  }
-
-  .modal h2 {
-    margin-top: 0;
-  }
-  
-  .modal input {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 100%;
-  }
-
-  .modal button {
-    background-color: lawngreen;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  /* Style the close button */
-  .modal-close {
-    position: absolute; /* Position the close button relative to the modal box */
-    top: 10px;
-    right: 10px;
-  }
-
   .navbar .search-container button {
     margin-left: -7px;
     padding-bottom: 8px;
@@ -114,6 +61,12 @@ nav img{
   .cart-button{
     float: right;
     margin-top: 10px;
+  }
+
+  .wrapper{
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    outline: 3px solid lawngreen;
   }
 
   .col{
@@ -148,13 +101,6 @@ nav img{
     color: #e6e6e6;
   }
 
-  .wrapper h1{
-    font-family: "Bangers", sans-serif;
-    font-size: 35px;
-    color: black;
-    padding-left: 10px;
-    border-bottom: solid 4px #000000;
-}
  .mode {
       float:right;
       padding-bottom: 15px;
@@ -169,10 +115,50 @@ nav img{
     font-size: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-top: solid 4px #81D65A;
   }
   
   footer img{
     width: 100px;
     height: 100px;
+}
+
+.aboutUsHeader{
+  width: 40%;
+}
+
+.contactUsHeader{
+  width: 40%;
+}
+
+.introInfo {
+  justify-content: center;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  padding: auto;
+}
+
+.bioInfo {
+  justify-content: center;
+  font-size: 16px;
+  padding-left: 20px;
+  display: inline-flex;
+  align-items: center;
+  padding: auto;
+}
+
+.contactInfo {
+  padding-top: 100px;
+  justify-content: center;
+  font-size: 24px;
+  align-items: center;
+  padding: auto;
+}
+
+.moreInfoBanner{
+  width: 100%;
+}
+
+.container {
+  justify-content: center;
 }
