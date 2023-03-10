@@ -4,4 +4,4 @@ INFO-I451
 
 
 node_modules could not be uploaded with the folder, so the node_modules folder will have to be added into the Comics-Cubed folder in order to run.
-Github Repository Link: 
+Github Repository Link: https://github.com/CoreyOaf/Comics-Cubed/tree/combination/Comics-Cubed 
