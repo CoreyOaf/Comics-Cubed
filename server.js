@@ -36,6 +36,9 @@ app.get("/CoMiCs_CuBeD_LoGiN_PaGe", (req,res) =>{
 app.get("/CoMiCs_CuBeD_InVeNtoRy_PaGe", (req,res) =>{
     res.sendFile(path.join(__dirname,"html/inventory.html"));
 });
+app.get("/CoMiCs_CuBeD_Update_News_PaGe", (req,res) =>{
+    res.sendFile(path.join(__dirname,"html/updateNews.html"));
+});
 app.get("/Dashboard", (req,res) =>{
     res.sendFile(path.join(__dirname,"html/dashboard.html"));
 });

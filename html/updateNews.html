@@ -1,0 +1,33 @@
+<!DOCTYPE html>   
+<html>   
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<title> Update Newsletter</title>  
+<link rel="stylesheet" href= "./style/base.css" type="text/css">
+<link rel="stylesheet" href= "./style/updateNews.css" type="text/css">   
+</head>    
+<body>     
+     <h1> Update Newsletter</h1>  
+
+     <div class="row">
+        <div class="col">
+            <a href="/Dashboard" class="btn" style="background-color: lawngreen; color: white;">Dashboard</a><br><br>
+        </div>
+     </div>
+
+    <form id="updateNews" >  
+        <div class="container" method = "POST">   
+            <label for="monthTitle">Insert Updated Month:</label> 
+            <input type="text" id="monthTitle" name="monthTitle" required >
+
+            <label for="updateLetter">Insert Updated Newsletter:</label>    
+            <input type="text" id="updateLetter" name="updateLetter"  class= "updateLetter" required> 
+
+            <button type="submit" onclick="updateNewsData();">Update</button>     
+        </div>   
+    </form> 
+    <footer>
+        Copyright &copy; <span id="year"></span> Comics Cubed | All Rights Reserved. <br>
+    </footer>    
+</body>     
+</html>
