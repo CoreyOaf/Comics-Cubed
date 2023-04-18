@@ -1,19 +1,67 @@
 const express = require("express");
 const path =require("path");
-// const data = require("./data-service.js");
-// const bodyParser = require('body-parser');
-// const fs = require("fs");
-// const multer = require("multer");
-// const exphbs = require('express-handlebars');
+const data = require("./data-service.js");
+const bodyParser = require('body-parser');
+const fs = require("fs");
+const multer = require("multer");
+const exphbs = require('express-handlebars');
 const app = express();
 
 const HTTP_PORT = process.env.PORT || 8080;
 
-app.use(express.static("public"));
+app.engine('.hbs', exphbs({ 
+    extname: '.hbs',
+    defaultLayout: "main",
+    helpers: { 
+        navLink: function(url, options){
+            return '<li' + 
+                ((url == app.locals.activeRoute) ? ' class="active" ' : '') + 
+                '><a href="' + url + '">' + options.fn(this) + '</a></li>';
+        },
+        equal: function (lvalue, rvalue, options) {
+            if (arguments.length < 3)
+                throw new Error("Handlebars Helper equal needs 2 parameters");
+            if (lvalue != rvalue) {
+                return options.inverse(this);
+            } else {
+                return options.fn(this);
+            }
+        }
+    } 
+}));
+
+app.set('view engine', '.hbs');
+
+// multer requires a few options to be setup to store files with file extensions
+// by default it won't store extensions for security reasons
+const storage = multer.diskStorage({
+    destination: "./public/images/uploaded",
+    filename: function (req, file, cb) {
+      // we write the filename as the current date down to the millisecond
+      // in a large web service this would possibly cause a problem if two people
+      // uploaded an image at the exact same time. A better way would be to use GUID's for filenames.
+      // this is a simple example.
+      cb(null, Date.now() + path.extname(file.originalname));
+    }
+  });
+  
+  // tell multer to use the diskStorage function for naming files instead of the default.
+  const upload = multer({ storage: storage });
+
+
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(function(req,res,next){
+    let route = req.baseUrl + req.path;
+    app.locals.activeRoute = (route == "/") ? "/" : route.replace(/\/$/, "");
+    next();
+});
+
 function onHttpStart(){
     console.log("Express http server listening on: " + HTTP_PORT);
 }
-
+//Main pages
 app.get("/", (req,res) =>{
     res.sendFile(path.join(__dirname, "html/Home.html"));
 });
@@ -47,4 +95,113 @@ app.get("/CoMiCs_CuBeD_Update_News_PaGe", (req,res) =>{
 app.get("/Dashboard", (req,res) =>{
     res.sendFile(path.join(__dirname,"html/dashboard.html"));
 });
+app.get("/employees", (req, res) => {
+    if (req.query.status) {
+         data
+         .getEmployeesByStatus(req.query.status)
+         .then((data) => {
+             res.render(
+                 "employees",
+                 data.length > 0 ? { employees: data } : {message: "No results by status"}
+             );
+         })
+         .catch((err) => {
+             res.render("employees", { message: "no results" });
+         });
+     } else if (req.query.department) {
+         data
+         .getEmployeesByDepartment(req.query.department)
+         .then((data) => {
+             res.render("employees", 
+             data.length > 0 ? { employees: data } : { message: "No results by department" }
+             );
+         })
+         .catch((err) => {
+             res.render("employees", {message: "no results"});
+         });
+     } else if (req.query.manager) {
+         data
+         .getEmployeesByManager(req.query.manager)
+         .then((data) => {
+             res.render(
+                 "employees",
+                 data.length > 0 ? { employees: data } : { message: "No results by manager" }
+             );
+         })
+         .catch((err) => {
+             res.render("employees", { message: "no results" });
+         });
+     } else {
+         data
+         .getAllEmployees()
+         .then((data) => {
+             res.render(
+                 "employees", 
+                 data.length > 0 ? { employees: data } : { message: "No Employees found" }
+             );
+         })
+         .catch((err) => {
+             res.render("employees", { message: err });
+         });
+     }
+ });
+ app.get("/comicBooks", (req,res) => {
+    data
+    .getComicBooks()
+    .then((data)=>{
+        res.render(
+            "comicBooks",
+            data.length > 0 ? {comicBooks: data} : {message: "No Comic Books Found"}
+            );
+         })
+    .catch((err) => {
+        res.render("comicBooks",{ message: "Error finding Comic Books" });
+    });
+});
+
+//GET Pages
+app.get("/employees/add", (req,res) => { 
+    data.getDepartments().then(
+        (data) => {
+            res.render("addEmployee", {departments: data});
+        }
+    ).catch((err) => {
+        res.render("addEmployee", {departments: []});
+    }) 
+});
+app.get("/comicBooks/add", (req,res) => {
+    data.getDepartments().then((data)  =>{
+        res.render("addComicBooks", {comicBooks: data});
+    }).catch((err) => {
+        //set department list to empty array
+            res.render("addComicBooks", {comicBooks: [] });
+    });
+});
+
+//POST Pages
+app.post("/employees/add", (req, res) => {
+    data
+    .addEmployee(req.body)
+    .then(()=>{
+      res.redirect("/employees"); 
+    })
+    .catch((err) => {
+        res.status(500).send("Unable to Add the Employee");
+    });
+  });
+  app.post("/comicBooks/add", (req, res) => {
+    data
+    .addComicBooks(req.body)
+    .then(()=>{
+      res.redirect("/comicBooks"); 
+    })
+    .catch((err) => {
+        res.status(500).send("Unable to Add the Comic Book");
+    }); 
+});
+
+app.use((req, res) => {
+    res.status(404).send("Page Not Found");
+  });
+  
 app.listen(HTTP_PORT, onHttpStart);
