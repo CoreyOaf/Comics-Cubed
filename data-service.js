@@ -20,19 +20,19 @@ var employeeSchema = new Schema({
 
 //Define Comic Book Schema
 var comicBookSchema = new Schema({
-    image: String,
+    comicCover: String,
     title: String,
     universe: String,
     year: Number,
     description: String,
-    price: Number,
+    price: Float,
     quantity: Number,
 });
 
 var ComicBook = mongoose.model('comicBooks', comicBookSchema);
 //create a new Comic Book
 var AmazingSpiderman = new ComicBook({
-    image: "./images/amazingspiderman.jpeg",
+    comicCover: "./images/amazingspiderman.jpeg",
     title: "Amazing Fantasy #15",
     universe: "Marvel",
     year: 1962,

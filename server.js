@@ -170,7 +170,7 @@ app.get("/employees/add", (req,res) => {
     }) 
 });
 app.get("/comicBooks/add", (req,res) => {
-    data.getDepartments().then((data)  =>{
+    data.getComicBooks().then((data)  =>{
         res.render("addComicBooks", {comicBooks: data});
     }).catch((err) => {
         //set department list to empty array
@@ -189,15 +189,34 @@ app.post("/employees/add", (req, res) => {
         res.status(500).send("Unable to Add the Employee");
     });
   });
-  app.post("/comicBooks/add", (req, res) => {
-    data
-    .addComicBooks(req.body)
-    .then(()=>{
-      res.redirect("/comicBooks"); 
-    })
-    .catch((err) => {
-        res.status(500).send("Unable to Add the Comic Book");
-    }); 
+  app.post("/comicBooks/add", upload.single("comicCover"), (req, res) => {
+    let comicBook = {
+        "comicCover": "",
+        "title": req.body.title,
+        "universe": req.body.universe,
+        "year": parseInt(req.body.year),
+        "description": req.body.description,
+        "price": parseFloat(req.body.price),
+        "quantity": parseInt(req.body.quantity),
+    };
+    if (req.file) {
+        comicBook.comicCover = req.file.filename;
+    }
+    else if (req.body.universe) {
+        comicBook.universe = req.body.universe;
+    }
+    else if (req.body.year) {
+        comicBook.year = parseInt(req.body.year);
+    }
+    else if (req.body.description) {
+        comicBook.description = req.body.description;
+    }
+    else if (req.body.price) {
+        comicBook.price = parseFloat(req.body.price);
+    } 
+    else if (req.body.quantity) {
+        comicBook.quantity = parseInt(req.body.quantity);
+    }
 });
 
 app.use((req, res) => {
