@@ -13,10 +13,10 @@
             <a href="/Dashboard" class="btn" style="background-color: lawngreen; color: white;">Dashboard</a><br><br>
         </div>
      </div>
-    <form>  
+    <form id="comicbookForm">  
         <div class="container">   
             <label for="comicbookImage">Insert Picture of the Comic Book:</label> 
-            <input type="file" id="comicbookImage" name="comicbookImage" accept="image/png, image/jpeg, image/jpeg">
+            <input type="file" id="comicbookImage" name="comicbookImage" accept="image/png, image/jpeg, image/jpeg" required>
 
             <label for="comicbookTitle">Insert Title of Comic Book:</label>    
             <input type="text" placeholder="Enter Title" id="comicbookTitle" name="comicbookTitle" required> 
@@ -34,7 +34,7 @@
             <input type="text" placeholder="Enter Price" id="comicbookPrice" name="comicbookPrice" required>
             
             <label for="quantity">Insert Quantity of Comic Book:</label>
-            <input type="number" id="quantity" name="quantity" min="1" max="10">
+            <input type="number" id="quantity" name="quantity" min="1" max="10" required>
 
             <button type="submit">Enter Comic Book</button>     
         </div>   
