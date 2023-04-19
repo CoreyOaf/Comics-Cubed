@@ -25,7 +25,7 @@ var comicBookSchema = new Schema({
     universe: String,
     year: Number,
     description: String,
-    price: Float,
+    price: Number,
     quantity: Number,
 });
 
@@ -36,7 +36,10 @@ var AmazingSpiderman = new ComicBook({
     title: "Amazing Fantasy #15",
     universe: "Marvel",
     year: 1962,
-    description: "The First Appearance of the Amazing Spider-Man! When young Peter Parker gains remarkable abilities from a radioactive spider, he must step up and try to become a hero — while also dealing with the fantastic pressures of an everyday teenager! For with great power, there must also come great responsibility!",
+    description: "The First Appearance of the Amazing Spider-Man! " + 
+    "When young Peter Parker gains remarkable abilities from a radioactive spider, " +
+    "he must step up and try to become a hero — while also dealing with the fantastic " + 
+    "pressures of an everyday teenager! For with great power, there must also come great responsibility!",
     price: 4.95,
     quantity: 3,
 });

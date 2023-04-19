@@ -63,37 +63,37 @@ function onHttpStart(){
 }
 //Main pages
 app.get("/", (req,res) =>{
-    res.sendFile(path.join(__dirname, "html/Home.html"));
+    res.sendFile(path.join(__dirname, "views/Home.html"));
 });
 app.get("/Home", (req,res) =>{
-    res.sendFile(path.join(__dirname, "html/Home.html"));
+    res.sendFile(path.join(__dirname, "views/Home.html"));
 });
 app.get("/Marketplace", (req,res) =>{
-    res.sendFile(path.join(__dirname,"html/marketplace.html"));
+    res.sendFile(path.join(__dirname,"views/marketplace.html"));
 });
 app.get("/Newsletter", (req,res) =>{
-    res.sendFile(path.join(__dirname,"html/newsletter.html"));
+    res.sendFile(path.join(__dirname,"views/newsletter.html"));
 });
 app.get("/Events", (req,res) =>{
-    res.sendFile(path.join(__dirname,"html/events.html"));
+    res.sendFile(path.join(__dirname,"views/events.html"));
 });
 app.get("/AboutUs", (req,res) =>{
-    res.sendFile(path.join(__dirname,"html/aboutus.html"));
+    res.sendFile(path.join(__dirname,"views/aboutus.html"));
 });
 app.get("/Cart", (req,res) =>{
-    res.sendFile(path.join(__dirname,"html/cart.html"));
+    res.sendFile(path.join(__dirname,"views/cart.html"));
 });
 app.get("/CoMiCs_CuBeD_LoGiN_PaGe", (req,res) =>{
-    res.sendFile(path.join(__dirname,"html/login.html"));
+    res.sendFile(path.join(__dirname,"views/login.html"));
 });
 app.get("/CoMiCs_CuBeD_InVeNtoRy_PaGe", (req,res) =>{
-    res.sendFile(path.join(__dirname,"html/inventory.html"));
+    res.sendFile(path.join(__dirname,"views/inventory.html"));
 });
 app.get("/CoMiCs_CuBeD_Update_News_PaGe", (req,res) =>{
-    res.sendFile(path.join(__dirname,"html/updateNews.html"));
+    res.sendFile(path.join(__dirname,"views/updateNews.html"));
 });
 app.get("/Dashboard", (req,res) =>{
-    res.sendFile(path.join(__dirname,"html/dashboard.html"));
+    res.sendFile(path.join(__dirname,"views/dashboard.html"));
 });
 app.get("/employees", (req, res) => {
     if (req.query.status) {
@@ -200,7 +200,10 @@ app.post("/employees/add", (req, res) => {
         "quantity": parseInt(req.body.quantity),
     };
     if (req.file) {
-        comicBook.comicCover = req.file.filename;
+        comicBook.comicCover = req.file.amazingspiderman.jpeg;
+    }
+    else if (req.body.title) {
+        comicBook.title = req.body.title;
     }
     else if (req.body.universe) {
         comicBook.universe = req.body.universe;
