@@ -1,0 +1,51 @@
+{{!-- {{needs revisited/finished}} --}}
+<div class="row">
+    
+    <div class="col-md-12">
+        <h2>Order</h2>
+        <hr />
+        <div class="table-responsive">
+        <table class="table ">
+            <thead>
+            <tr>
+                <th>Order&nbsp;Number</th>
+                <th>Order&nbsp;Date</th>
+                <th>Customer&nbsp;Name</th>
+                <th>Email</th>
+                <th>Phone&nbsp;Number</th>
+                <th>Product&nbsp;Titles</th>
+                <th>Final&nbsp;Cost</th>
+                <th>Picked&nbsp;Up?</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each order}}
+                <tr>
+                    {{!-- {{get order number}} --}}
+                    <td><a href="/order/{{orderNum}}"></a>{{orderNum}}</td>
+                    {{!-- {{get order date}} --}}
+                    <td><a href="/order/{{orderDate}}"></a>{{orderDate}}</td>
+                    {{!-- {{get customer namer}} --}}
+                    <td><a href="/order/{{customerName}}"></a>{{customerName}}</td>
+                    {{!-- {{get customer email}} --}}
+                    <td><a href="/order/{{customerEmail}}"></a>{{customerEmail}}</td>
+                    {{!-- {{get customer phone}} --}}
+                    <td><a href="/order/{{customerPhone}}"></a>{{customerPhone}}</td>
+                    {{!-- {{get order titles}} --}}
+                    <td><a href="/order/{{orderTitles}}"></a>{{orderTitles}}</td>
+                    {{!-- {{get final cost}} --}}
+                    <td><a href="/order/{{finalCost}}"></a>{{finalCost}}</td>
+                    {{!-- {{get order status}} --}}
+                    <td><a href="/order?status={{status}}">{{status}}</a></td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+        </div>
+    </div>
+    {{#unless employees}}
+    <div class="col-md-12 text-center">
+            <strong>{{message}}</strong>
+    </div>
+    {{/unless}}
+</div>

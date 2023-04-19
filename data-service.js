@@ -3,6 +3,39 @@ var Schema = mongoose.Schema;
 //connect to Shawns MongoDb Atlas Database
 mongoose.connect("mongodb+srv://oafc:EweXWr2PQE14m3uK@databasepractice.e3uyu0n.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
 
+const fs = require("fs");
+
+let employees = [];
+let comicBooks = [];
+let orders = [];
+
+module.exports.initialize = function () {
+    return new Promise( (resolve, reject) => {
+        fs.readFile('./data/employees.json', (err, data) => {
+            if (err) {
+                reject(err); return;
+            }
+
+            employees = JSON.parse(data);
+        });
+        fs.readFile('./data/comicBooks.json', (err, data) => {
+            if (err) {
+                reject(err); return;
+             }
+            comicBooks = JSON.parse(data);
+            resolve();
+        });
+        fs.readFile('./data/orders.json', (err, data) => {
+            if (err) {
+                reject(err); return;
+             }
+            orders = JSON.parse(data);
+            resolve();
+        });  
+        
+    });
+}
+
 //Define Employee Schema
 var employeeSchema = new Schema({
     employeeNum: Number,
@@ -29,6 +62,18 @@ var comicBookSchema = new Schema({
     quantity: Number,
 });
 
+//Define Order Schema
+var orderSchema = new Schema({
+    orderNum: Number,
+    orderDate: String,
+    customerName: String,
+    customerEmail: Number,
+    customerPhone: String,
+    orderTitles: String,
+    finalCost: Number,
+    status: String,
+});
+
 var ComicBook = mongoose.model('comicBooks', comicBookSchema);
 //create a new Comic Book
 var AmazingSpiderman = new ComicBook({
@@ -43,3 +88,59 @@ var AmazingSpiderman = new ComicBook({
     price: 4.95,
     quantity: 3,
 });
+
+var Order = mongoose.model('customerOrders', orderSchema);
+//Create test order
+var testOrder = new Order({ 
+    orderNum: Math.random(),
+    orderDate: "4/19/2023",
+    customerName: "Mary Jane",
+    customerEmail: "maryJane@gmail.com",
+    customerPhone: (765)-398-2263,
+    orderTitles: "Title1,Title2",
+    finalCost: 20.22,
+    status: "false",
+});
+
+//get all orders 
+module.exports.getAllOrders = function(){
+    return new Promise((resolve,reject)=>{
+        if (orders.length == 0) {
+            reject("query returned 0 results"); return;
+        }
+        resolve(orders);
+    })
+}
+
+// add orders to database? 
+//This needs revisited
+module.exports.addOrder = function (orderData) {
+    return new Promise(function (resolve, reject) {
+        orderData.status = (orderData.isManager) ? true : false;
+        //Find a way to 
+        orderData.orderNum = Math.random() * (100000 - 1000) + 1000;
+        order.push(orderData);
+
+        resolve();
+    });
+
+};
+
+//Update order as picked up and delete from data base? 
+//This needs revisited
+module.exports.updateOrder = function (orderData) {
+
+    orderData.status = (orderData.status) ? true : false;
+
+    return new Promise(function (resolve, reject) {
+        for(let i=0; i < orders.length; i++){
+            if(orders[i].orderNum == orderdata.orderNum){
+                orders[i] = orderData;
+            }
+        }
+        resolve();
+    });
+};
+
+
+//Needs delete order function - also the deleteOrder needs to be implemented in the udpateOrder? 

@@ -159,6 +159,36 @@ app.get("/employees", (req, res) => {
     });
 });
 
+
+//Get checkOrder.hbs for Owner... displays all orders
+app.get("/checkOrder", (req, res) => {
+    
+    if (req.query.status) {
+         data.getEmployeesByStatus(req.query.status).then((data) => {
+             res.render("employees", {employees:data});
+         }).catch((err) => {
+             res.render("employees",{ message: "no results" });
+         });
+     } else if (req.query.department) {
+         data.getEmployeesByDepartment(req.query.department).then((data) => {
+             res.render("employees", {employees:data});
+         }).catch((err) => {
+             res.render("employees",{ message: "no results" });
+         });
+     } else if (req.query.manager) {
+         data.getEmployeesByManager(req.query.manager).then((data) => {
+             res.render("employees", {employees:data});
+         }).catch((err) => {
+             res.render("employees",{ message: "no results" });
+         });
+     } else {
+         data.getAllEmployees().then((data) => {
+             res.render("employees", {employees:data});
+         }).catch((err) => {
+             res.render("employees",{ message: "no results" });
+         });
+     }
+ });
 //GET Pages
 app.get("/employees/add", (req,res) => { 
     data.getDepartments().then(

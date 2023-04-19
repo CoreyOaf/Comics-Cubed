@@ -1,0 +1,83 @@
+{{!-- {{needs revisited/finished}} --}}
+<div class="row">
+    <div class="col-md-12">
+
+        <h2>Order {{order.orderNum}}</h2>
+        <hr />
+
+        <form method="post" action="/employee/update">
+
+            <input type="hidden" name="orderNum" value="{{order.orderNum}}" />
+
+
+            <fieldset>
+                <legend>Order Information</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="orderDate">Order Date:</label>
+                            <input class="form-control" id="orderDate" name="orderDate" type="text" value="{{order.orderDate}}" readonly/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="custName">Name:</label>
+                            <input class="form-control" id="custName" name="custName" type="text" value="{{order.customerName}}" readonly/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="custEmail">Email:</label>
+                            <input class="form-control" id="custEmail" name="custEmail" type="text" value="{{order.customerEmail}}" readonly/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="custPhone">Phone:</label>
+                            <input class="form-control" id="custPhone" name="custPhone" type="text" value="{{order.customerPhone}}" readonly />
+                        </div>
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="orderTitles">Order Titles:</label>
+                            <input class="form-control" id="orderTitles" name="orderTitles" type="text" value="{{order.orderTitles}}" readonly />
+                        </div>
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="finalCost">Final Costs:</label>
+                            <input class="form-control" id="finalCost" name="finalCost" type="text" value="{{order.finalCost}}" readonly />
+                        </div>
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Picked Up?:</label><br />
+                            <label  class="checkbox-inline">
+                                <input type="radio" id="statusPickedUp" name="status" {{#equal order.status "Picked Up" }}checked{{/equal}} value="false" /> Picked Up
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" id="statusNotPickedUp" name="status" {{#equal order.status "Not Picked Up" }}checked{{/equal}} value="true" /> Not Picked Up
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                    
+                <hr />
+
+            <input type="submit" class="btn btn-primary pull-right" value="Marked: Picked Up" /><br /><br /><br />
+
+        </form>
+    </div>
+</div>
