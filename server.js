@@ -9,7 +9,7 @@ const app = express();
 
 const HTTP_PORT = process.env.PORT || 8080;
 
-app.engine('.hbs', exphbs({ 
+app.engine('.hbs', exphbs.engine({ 
     extname: '.hbs',
     defaultLayout: "main",
     helpers: { 
