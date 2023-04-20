@@ -7,6 +7,8 @@ const multer = require("multer");
 const exphbs = require('express-handlebars');
 const app = express();
 
+app.use(express.static('public'));
+
 const HTTP_PORT = process.env.PORT || 8080;
 
 app.engine('.hbs', exphbs.engine({ 
@@ -72,7 +74,7 @@ app.get("/Marketplace", (req,res) =>{
     res.sendFile(path.join(__dirname,"views/marketplace.html"));
 });
 app.get("/Newsletter", (req,res) =>{
-    res.sendFile(path.join(__dirname,"views/newsletter.html"));
+    res.sendFile(path.join(__dirname,"views/newsletter.hbs"));
 });
 app.get("/Events", (req,res) =>{
     res.sendFile(path.join(__dirname,"views/events.html"));
