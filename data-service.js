@@ -74,6 +74,25 @@ var orderSchema = new Schema({
     status: String,
 });
 
+var Employees = mongoose.model('employees', employeeSchema);
+    //create a new Employee
+    var PeterParker = new Employee({
+        employeeNum: 1,
+        firstName: "Peter",
+        lastName: "Parker",
+        email: "peterparker@mcu.com",
+        SSN: "123-12-1234",
+        addressStreet: "1234 Marvel Ave",
+        addressCity: "New York City",
+        addressState: "New York",
+        addressPostal: "10001",
+        maritalStatus: "Single",
+        isManager: false,
+        employeeManagerNum: 1,
+        status: "Full Time",
+        hireDate: "April 11, 2023",
+    });
+    
 var ComicBook = mongoose.model('comicBooks', comicBookSchema);
 //create a new Comic Book
 var AmazingSpiderman = new ComicBook({
