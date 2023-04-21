@@ -7,6 +7,8 @@ const multer = require("multer");
 const exphbs = require('express-handlebars');
 const app = express();
 
+app.use(express.static('public'));
+
 const HTTP_PORT = process.env.PORT || 8080;
 
 app.engine('.hbs', exphbs.engine({ 
@@ -164,30 +166,12 @@ app.get("/employees", (req, res) => {
 app.get("/checkOrder", (req, res) => {
     
     if (req.query.status) {
-         data.getEmployeesByStatus(req.query.status).then((data) => {
-             res.render("employees", {employees:data});
+         data.getAllOrders(req.query.status).then((data) => {
+             res.render("order", {order:data});
          }).catch((err) => {
-             res.render("employees",{ message: "no results" });
+             res.render("order",{ message: "no results" });
          });
-     } else if (req.query.department) {
-         data.getEmployeesByDepartment(req.query.department).then((data) => {
-             res.render("employees", {employees:data});
-         }).catch((err) => {
-             res.render("employees",{ message: "no results" });
-         });
-     } else if (req.query.manager) {
-         data.getEmployeesByManager(req.query.manager).then((data) => {
-             res.render("employees", {employees:data});
-         }).catch((err) => {
-             res.render("employees",{ message: "no results" });
-         });
-     } else {
-         data.getAllEmployees().then((data) => {
-             res.render("employees", {employees:data});
-         }).catch((err) => {
-             res.render("employees",{ message: "no results" });
-         });
-     }
+        }
  });
 //GET Pages
 app.get("/employees/add", (req,res) => { 
