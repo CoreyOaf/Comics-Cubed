@@ -49,7 +49,7 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage });
 
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function(req,res,next){
@@ -72,7 +72,7 @@ app.get("/Marketplace", (req,res) =>{
     res.sendFile(path.join(__dirname,"views/marketplace.html"));
 });
 app.get("/Newsletter", (req,res) =>{
-    res.sendFile(path.join(__dirname,"views/newsletter.html"));
+    res.sendFile(path.join(__dirname,"views/newsletter.hbs"));
 });
 app.get("/Events", (req,res) =>{
     res.sendFile(path.join(__dirname,"views/events.html"));

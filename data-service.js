@@ -74,7 +74,7 @@ var orderSchema = new Schema({
     status: String,
 });
 
-var Employees = mongoose.model('employees', employeeSchema);
+var Employee = mongoose.model('employees', employeeSchema);
     //create a new Employee
     var PeterParker = new Employee({
         employeeNum: 1,
@@ -92,7 +92,7 @@ var Employees = mongoose.model('employees', employeeSchema);
         status: "Full Time",
         hireDate: "April 11, 2023",
     });
-    
+
 var ComicBook = mongoose.model('comicBooks', comicBookSchema);
 //create a new Comic Book
 var AmazingSpiderman = new ComicBook({
