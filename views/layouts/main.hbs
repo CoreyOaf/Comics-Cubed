@@ -1,0 +1,96 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Latest compiled and minified Bootstrap 3.3.7 CSS -->
+    <link rel="stylesheet" href= "./style/base.css" type="text/css">
+	<link rel="stylesheet" href= "./style/home.css" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bangers">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <script src="./script/home_functions.js" defer></script>
+	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Home</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <img src="./images/comicscubed.png" alt="Comics Cubed Logo">
+		  <div id="nav_brand"><b>Comics<sup> 3</sup></b></div>
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            {{#navLink "/"}}Home{{/navLink}}
+            {{#navLink "/Marketplace"}}Marketplace{{/navLink}}
+            {{#navLink "/Newsletter"}}Newsletter{{/navLink}}
+            {{#navLink "/Events"}}Events{{/navLink}}
+            {{#navLink "/AboutUs"}}About Us{{/navLink}}
+            <a class="search-container">
+			        <input type="text" placeholder="Search.." name="search">
+			        <button type="submit"><i class="fa fa-search"></i></button>
+			      </a>
+            <a class="cart-button">View Cart
+			        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="bi bi-cart" viewBox="0 0 16 16">
+				      <path fill="lawngreen" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+				      </svg>
+		        </a>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+      <div class="mode">
+			Dark mode:             
+			<span class="change">OFF</span>
+		</div>
+    </nav>
+    <div class="container">
+      {{{body}}}
+    </div>
+
+    <footer>
+				Copyright &copy; <span id="year"></span> Comics Cubed | All Rights Reserved. <br>
+				<img src="./images/comicscubed.png" alt="Comics Cubed Logo">
+			</footer>
+
+    <!-- Ajax Google API -->
+    <script>
+      <script 
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+      </script>
+
+    // Latest compiled and minified jQuery 3.2.1 JavaScript
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"
+    ></script>
+
+    // Latest compiled and minified Bootstrap 3.3.7 JavaScript
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
