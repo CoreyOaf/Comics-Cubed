@@ -13,7 +13,7 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 app.engine('.hbs', exphbs.engine({ 
     extname: '.hbs',
-    defaultLayout: "main",
+    defaultLayout: "dashboardmain",
     helpers: { 
         navLink: function(url, options){
             return '<li' + 
@@ -64,6 +64,12 @@ function onHttpStart(){
     console.log("Express http server listening on: " + HTTP_PORT);
 }
 //Main pages
+
+app.get("/dashboard", (req,res) => {
+res.render("dashboard", {layout: dashboardmain});
+});
+//app.get("/dashboard", (req,res) => {
+//res.render('dashboard', {layout: 'dashboardmain'});
 app.get("/", (req,res) =>{
     res.sendFile(path.join(__dirname, "views/Home.html"));
 });
@@ -161,7 +167,7 @@ app.get("/employees", (req, res) => {
     });
 });
 
-
+//res.render('handlebarName', {layout: 'main',data: variables});
 //Get checkOrder.hbs for Owner... displays all orders
 app.get("/checkOrder", (req, res) => {
     
