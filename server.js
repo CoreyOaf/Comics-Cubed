@@ -51,7 +51,7 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage });
 
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function(req,res,next){
