@@ -64,44 +64,35 @@ function onHttpStart(){
     console.log("Express http server listening on: " + HTTP_PORT);
 }
 //Main pages
-
-app.get("/dashboard", (req,res) => {
-res.render("dashboard", {layout: dashboardmain});
-});
-//app.get("/dashboard", (req,res) => {
-//res.render('dashboard', {layout: 'dashboardmain'});
 app.get("/", (req,res) =>{
-    res.render("home");
-});
-app.get("/Home", (req,res) =>{
-    res.sendFile(path.join(__dirname, "views/Home.html"));
+    res.render("home", {layout: "homelay"});;
 });
 app.get("/Marketplace", (req,res) =>{
-    res.sendFile(path.join(__dirname,"views/marketplace.html"));
+    res.render("marketplace", {layout: "marketplacelay"});;
 });
 app.get("/Newsletter", (req,res) =>{
     res.render("newsletter", {layout: "newsletterlay"});
 });
 app.get("/Events", (req,res) =>{
-    res.sendFile(path.join(__dirname,"views/events.html"));
+    res.render("events", {layout: "eventslay"});
 });
 app.get("/AboutUs", (req,res) =>{
-    res.sendFile(path.join(__dirname,"views/aboutus.html"));
+    res.render("aboutus", {layout: "aboutuslay"});
 });
 app.get("/Cart", (req,res) =>{
-    res.sendFile(path.join(__dirname,"views/cart.html"));
+    res.render("cart", {layout: "cartlay"});
 });
-app.get("/CoMiCs_CuBeD_LoGiN_PaGe", (req,res) =>{
-    res.sendFile(path.join(__dirname,"views/login.html"));
+app.get("/EmployeeLogin", (req,res) =>{
+    res.render("employeeLogin", {layout: "employeeLoginlay"});
 });
-app.get("/CoMiCs_CuBeD_InVeNtoRy_PaGe", (req,res) =>{
-    res.sendFile(path.join(__dirname,"views/inventory.html"));
+app.get("/InventoryEntry", (req,res) =>{
+    res.render("inventory", {layout: "inventorylay"});
 });
-app.get("/CoMiCs_CuBeD_Update_News_PaGe", (req,res) =>{
-    res.sendFile(path.join(__dirname,"views/updateNews.html"));
+app.get("/UpdateNews", (req,res) =>{
+    res.render("updateNews", {layout: "updateNewslay"});
 });
 app.get("/Dashboard", (req,res) =>{
-    res.sendFile(path.join(__dirname,"views/dashboard.html"));
+    res.render("dashboard", {layout: "dashboardlay"});
 });
 app.get("/employees", (req, res) => {
     if (req.query.status) {
