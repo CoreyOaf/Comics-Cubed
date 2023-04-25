@@ -71,7 +71,7 @@ res.render("dashboard", {layout: dashboardmain});
 //app.get("/dashboard", (req,res) => {
 //res.render('dashboard', {layout: 'dashboardmain'});
 app.get("/", (req,res) =>{
-    res.sendFile(path.join(__dirname, "views/Home.html"));
+    res.render("home");
 });
 app.get("/Home", (req,res) =>{
     res.sendFile(path.join(__dirname, "views/Home.html"));
@@ -80,7 +80,7 @@ app.get("/Marketplace", (req,res) =>{
     res.sendFile(path.join(__dirname,"views/marketplace.html"));
 });
 app.get("/Newsletter", (req,res) =>{
-    res.sendFile(path.join(__dirname,"views/newsletter.hbs"));
+    res.render("newsletter", {layout: "newsletterlay"});
 });
 app.get("/Events", (req,res) =>{
     res.sendFile(path.join(__dirname,"views/events.html"));
