@@ -94,6 +94,12 @@ app.get("/UpdateNews", (req,res) =>{
 app.get("/Dashboard", (req,res) =>{
     res.render("dashboard", {layout: "dashboardlay"});
 });
+app.get("/checkOrder", (req,res) =>{
+    res.render("checkOrder", {layout: "dashboardlay"});
+});
+app.get("/order", (req,res) =>{
+    res.render("order", {layout: "dashboardlay"});
+});
 app.get("/employees", (req, res) => {
     if (req.query.status) {
          data
@@ -160,7 +166,7 @@ app.get("/employees", (req, res) => {
 
 //res.render('handlebarName', {layout: 'main',data: variables});
 //Get checkOrder.hbs for Owner... displays all orders
-app.get("/checkOrder", (req, res) => {
+app.get("/order", (req, res) => {
     
     if (req.query.status) {
          data.getAllOrders(req.query.status).then((data) => {
