@@ -135,7 +135,7 @@ module.exports.getAllOrders = function(){
 //This needs revisited
 module.exports.addOrder = function (orderData) {
     return new Promise(function (resolve, reject) {
-        orderData.status = (orderData.isManager) ? true : false;
+        orderData.status = (orderData.status) ? true : false;
         //Find a way to 
         orderData.orderNum = Math.random() * (100000 - 1000) + 1000;
         order.push(orderData);
