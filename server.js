@@ -182,10 +182,10 @@ app.get("/employees/add", (req,res) => {
 });
 app.get("/comicBooks/add", (req,res) => {
     data.getComicBooks().then((data)  =>{
-        res.render("addComicBooks", {comicBooks: data});
+        res.render("inventory", {comicBooks: data});
     }).catch((err) => {
         //set department list to empty array
-            res.render("addComicBooks", {comicBooks: [] });
+            res.render("inventory", {comicBooks: [] });
     });
 });
 
@@ -201,36 +201,14 @@ app.post("/employees/add", (req, res) => {
     });
   });
   app.post("/comicBooks/add", upload.single("comicCover"), (req, res) => {
-    let comicBook = {
-        "comicCover": "",
-        "title": req.body.title,
-        "universe": req.body.universe,
-        "year": parseInt(req.body.year),
-        "description": req.body.description,
-        "price": parseFloat(req.body.price),
-        "quantity": parseInt(req.body.quantity),
-    };
-    if (req.file) {
-        comicBook.comicCover = req.file.amazingspiderman.jpeg;
-    }
-    else if (req.body.title) {
-        comicBook.title = req.body.title;
-    }
-    else if (req.body.universe) {
-        comicBook.universe = req.body.universe;
-    }
-    else if (req.body.year) {
-        comicBook.year = parseInt(req.body.year);
-    }
-    else if (req.body.description) {
-        comicBook.description = req.body.description;
-    }
-    else if (req.body.price) {
-        comicBook.price = parseFloat(req.body.price);
-    } 
-    else if (req.body.quantity) {
-        comicBook.quantity = parseInt(req.body.quantity);
-    }
+    data
+    .addcomicBook(req.body)
+    .then(()=>{
+      res.redirect("/marketplace"); 
+    })
+    .catch((err) => {
+        res.status(500).send("Unable to Add the Comic Book");
+    });
 });
 
 app.use((req, res) => {

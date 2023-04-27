@@ -53,12 +53,13 @@ var employeeSchema = new Schema({
 
 //Define Comic Book Schema
 var comicBookSchema = new Schema({
+    idNum: Number,
     comicCover: String,
-    title: String,
-    universe: String,
-    year: Number,
-    description: String,
-    price: Number,
+    comicbookTitle: String,
+    comicbookUniverse: String,
+    comicbookYear: Number,
+    comicbookDescription: String,
+    comicbookPrice: Number,
     quantity: Number,
 });
 
@@ -96,15 +97,16 @@ var Employee = mongoose.model('employees', employeeSchema);
 var ComicBook = mongoose.model('comicBooks', comicBookSchema);
 //create a new Comic Book
 var AmazingSpiderman = new ComicBook({
+    idNum: 1,
     comicCover: "./images/amazingspiderman.jpeg",
-    title: "Amazing Fantasy #15",
-    universe: "Marvel",
-    year: 1962,
-    description: "The First Appearance of the Amazing Spider-Man! " + 
+    comicbookTitle: "Amazing Fantasy #15",
+    comicbookUniverse: "Marvel",
+    comicbookYear: 1962,
+    comicbookDescription: "The First Appearance of the Amazing Spider-Man! " + 
     "When young Peter Parker gains remarkable abilities from a radioactive spider, " +
     "he must step up and try to become a hero — while also dealing with the fantastic " + 
     "pressures of an everyday teenager! For with great power, there must also come great responsibility!",
-    price: 4.95,
+    comicbookPrice: 4.95,
     quantity: 3,
 });
 
@@ -120,6 +122,33 @@ var testOrder = new Order({
     finalCost: 20.22,
     status: "false",
 });
+module.exports.getAllEmployees = function(){
+    return new Promise(function (resolve, reject){
+        Employee.find({})
+        .exec()
+        .then(function (data){
+            console.log(data + "findData");
+            data = data.map((value) => value.toObject());
+            resolve(data);
+    }).catch((err) => {
+        reject("Query returned 0 results"); return;
+    });
+});
+}
+
+module.exports.getAllComicBooks = function(){
+    return new Promise(function (resolve, reject){
+        ComicBook.find({})
+        .exec()
+        .then(function (data){
+            console.log(data + "findData");
+            data = data.map((value) => value.toObject());
+            resolve(data);
+    }).catch((err) => {
+        reject("Query returned 0 results"); return;
+    });
+});
+}
 
 //get all orders 
 module.exports.getAllOrders = function(){
@@ -131,16 +160,58 @@ module.exports.getAllOrders = function(){
     })
 }
 
+module.exports.addEmployee = function (employeeData) {
+    return new Promise(function (resolve, reject){
+      employeeData.employeeNum = Math.floor(Math.random() * 10000);
+      console.log(employeeData);
+      employeeData.isManager = (employeeData.isManager) ? true : false;
+    for (var prop in employeeData) {
+        if(employeeData[prop] == '')
+            employeeData[prop] = null;
+    }
+    
+    Employee.create(employeeData).then(() => {
+        resolve();
+    }).catch((err) =>{
+        reject("Unable to create employee"); return;
+        });  
+    });
+
+};
+
+module.exports.addcomicBook = function (comicBookData) {
+    return new Promise(function (resolve, reject){
+      comicBookData.idNum = Math.floor(Math.random() * 10000);
+      console.log(comicBookData);
+    for (var prop in comicBookData) {
+        if(comicBookData[prop] == '')
+            comicBookData[prop] = null;
+    }
+    
+    ComicBook.create(comicBookData).then(() => {
+        resolve();
+    }).catch((err) =>{
+        reject("Unable to create comic book"); return;
+        });  
+    });
+
+};
 // add orders to database? 
 //This needs revisited
 module.exports.addOrder = function (orderData) {
-    return new Promise(function (resolve, reject) {
-        orderData.status = (orderData.isManager) ? true : false;
-        //Find a way to 
-        orderData.orderNum = Math.random() * (100000 - 1000) + 1000;
-        order.push(orderData);
-
+    return new Promise(function (resolve, reject){
+      orderData.orderNum = Math.floor(Math.random() * 10000);
+      console.log(orderData);
+    for (var prop in orderData) {
+        if(orderData[prop] == '')
+            orderData[prop] = null;
+    }
+    
+    Order.create(orderData).then(() => {
         resolve();
+    }).catch((err) =>{
+        reject("Unable to create order"); return;
+        });  
     });
 
 };
