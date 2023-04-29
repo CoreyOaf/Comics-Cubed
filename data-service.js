@@ -139,12 +139,12 @@ module.exports.getAllEmployees = function(){
 module.exports.getAllComicBooks = function(){
     return new Promise(function (resolve, reject){
         ComicBook.find({})
-    //     .exec()
-    //     .then(function (data){
-    //         console.log(data + "findData");
-    //         data = data.map((value) => value.toObject());
-    //         resolve(data);
-    // }).catch((err) => {
+        .exec()
+        .then(function (data){
+            console.log(data + "findData");
+            data = data.map((value) => value.toObject());
+            resolve(data);
+    }).catch((err) => {
         reject("Query returned 0 results"); return;
     });
 });
