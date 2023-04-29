@@ -151,8 +151,7 @@ app.get("/employees", (req, res) => {
      }
  });
  app.get("/comicBooks", (req,res) => {
-    data
-    .getComicBooks()
+    data.getComicBooks()
     .then((data)=>{
         res.render(
             "comicBooks",
