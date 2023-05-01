@@ -130,7 +130,7 @@ var testOrder = new Order({
     status: "false",
 });
 
-var ComicBook = mongoose.model('newsletter', newsletterSchema);
+var Newsletter = mongoose.model('newsletters', newsletterSchema);
 //create a new Newsletter
 var aprilNewsletter = new Newsletter({
     newsDate: "04/29/2023",
