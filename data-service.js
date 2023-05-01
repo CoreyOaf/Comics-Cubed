@@ -76,6 +76,12 @@ var orderSchema = new Schema({
     status: String,
 });
 
+//Define Newsletter Schema
+var newsletterSchema = new Schema({
+    newsDate: String,
+    newsDesc: String,
+});
+
 var Employee = mongoose.model('employees', employeeSchema);
     //create a new Employee
     var PeterParker = new Employee({
@@ -123,6 +129,15 @@ var testOrder = new Order({
     finalCost: 20.22,
     status: "false",
 });
+
+var ComicBook = mongoose.model('newsletter', newsletterSchema);
+//create a new Newsletter
+var aprilNewsletter = new Newsletter({
+    newsDate: "04/29/2023",
+    newsDesc: "We are having a discount on all Batman comics this week.",
+    
+});
+
 
 module.exports.getAllComicBooks = function(){
     return new Promise(function (resolve, reject){
