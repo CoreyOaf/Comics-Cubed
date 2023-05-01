@@ -379,6 +379,20 @@ module.exports.updateOrder = function (orderData) {
     });
 };
 
+//creating and adding Newsletters
+module.exports.addNewsletter = function (newsletterData) {
+    return new Promise(function (resolve, reject){
+      console.log(newsletterData);
+    
+    Newsletter.create(newsletterData).then(() => {
+        resolve();
+    }).catch((err) =>{
+        reject("Unable to create newsletter"); return;
+        });  
+    });
+
+};
+
 
 //Needs delete order function - also the deleteOrder needs to be implemented in the udpateOrder? 
 
