@@ -130,6 +130,15 @@ nav img{
     color: #555;
   }
 
+  .mode {
+    float:right;
+    padding-bottom: 15px;
+    margin-top: -5px;
+    margin-right: 10px;
+    font-family: "Bangers", sans-serif;
+    font-size: 30px;
+    }
+
   .dark{
     background-color: #666;
     color: #e6e6e6;
@@ -164,10 +173,3 @@ nav img{
   padding-right: 60px;
   float: left;
 }
-.mode {
-    float:right;
-    margin-top: 2.5%;
-  margin-right: 10px;
-  font-family: "Bangers", sans-serif;
-  font-size: 30px;
-  }

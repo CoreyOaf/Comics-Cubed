@@ -13,7 +13,7 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 app.engine('.hbs', exphbs.engine({ 
     extname: '.hbs',
-    defaultLayout: "dashboardmain",
+    defaultLayout: "dashboardlay",
     helpers: { 
         navLink: function(url, options){
             return '<li' + 
@@ -86,7 +86,7 @@ app.get("/EmployeeLogin", (req,res) =>{
     res.render("employeeLogin", {layout: "employeeLoginlay"});
 });
 app.get("/InventoryEntry", (req,res) =>{
-    res.render("inventory", {layout: "inventorylay"});
+    res.render("addComicBook", {layout: "dashboardlay"});
 });
 app.get("/UpdateNews", (req,res) =>{
     res.render("updateNews", {layout: "updateNewslay"});
@@ -100,6 +100,16 @@ app.get("/checkOrder", (req,res) =>{
 app.get("/order", (req,res) =>{
     res.render("order", {layout: "dashboardlay"});
 });
+
+// app.get("/updateNews", (req,res) =>{
+//     if (req.query.status) {
+//         data.updateNewsData(req.query.status)
+
+//             );
+// });
+
+
+
 app.get("/employees", (req, res) => {
     if (req.query.status) {
          data
@@ -151,19 +161,32 @@ app.get("/employees", (req, res) => {
      }
  });
  app.get("/comicBooks", (req,res) => {
-    data
-    .getComicBooks()
-    .then((data)=>{
-        res.render(
-            "comicBooks",
-            data.length > 0 ? {comicBooks: data} : {message: "No Comic Books Found"}
+    if (req.query.idNum) {
+        data
+        .getComicByNum(req.query.idNum)
+        .then((data) => {
+            res.render(
+                "dashboard",
+                data.length > 0 ? {comicBooks: data } : {message: "No results by ID Num"}
             );
-         })
-    .catch((err) => {
-        res.render("comicBooks",{ message: "Error finding Comic Books" });
+        })
+        .catch((err) => {
+            res.render("dashboard", { message: "no results" });
+        });
+     } else {
+            data
+            .getAllComicBooks()
+            .then((data) => {
+                res.render(
+                    "dashboard", 
+                    data.length > 0 ? { comicBooks: data } : { message: "No Comic Books found" }
+                );
+            })
+            .catch((err) => {
+                res.render("dashboard", { message: err });
+            });
+        }
     });
-});
-
 //res.render('handlebarName', {layout: 'main',data: variables});
 //Get checkOrder.hbs for Owner... displays all orders
 app.get("/order", (req, res) => {
@@ -178,20 +201,42 @@ app.get("/order", (req, res) => {
  });
 //GET Pages
 app.get("/employees/add", (req,res) => { 
-    data.getDepartments().then(
+    data.getAllEmployees().then(
         (data) => {
-            res.render("addEmployee", {departments: data});
+            res.render("addEmployee", {employees: data}, {layout: "dashboardlay"});
         }
     ).catch((err) => {
-        res.render("addEmployee", {departments: []});
+        res.render("addEmployee", {employees: []}, {layout: "dashboardlay"});
     }) 
 });
-app.get("/comicBooks/add", (req,res) => {
-    data.getComicBooks().then((data)  =>{
-        res.render("addComicBooks", {comicBooks: data});
+app.get("/InventoryEntry", (req,res) => {
+    data.getAllComicBooks().then((data)  =>{
+        res.render("inventory", {comicBooks: data}, {layout: "dashboardlay"});
     }).catch((err) => {
         //set department list to empty array
-            res.render("addComicBooks", {comicBooks: [] });
+            res.render("inventory", {comicBooks: []}, {layout: "dashboardlay"});
+    });
+});
+
+app.get("/employees/delete/:empNum", (req, res) => {
+    data
+    .deleteEmployeeByNum(req.params.empNum)
+    .then(() => {
+        res.redirect("/employees");
+    })
+    .catch((err) => {
+        res.status(500).send("Unable to Remove Employee / Employee Not Found");
+    });
+});
+
+app.get("/comicBooks/delete/:comicNum", (req, res) => {
+    data
+    .deleteDepartmentById(req.params.comicNum)
+    .then(() => {
+        res.redirect("/Dashboard");
+    })
+    .catch((err) => {
+        res.status(500).send("Unable to Remove Comic Book / Comic Book Not Found");
     });
 });
 
@@ -206,37 +251,38 @@ app.post("/employees/add", (req, res) => {
         res.status(500).send("Unable to Add the Employee");
     });
   });
-  app.post("/comicBooks/add", upload.single("comicCover"), (req, res) => {
-    let comicBook = {
-        "comicCover": "",
-        "title": req.body.title,
-        "universe": req.body.universe,
-        "year": parseInt(req.body.year),
-        "description": req.body.description,
-        "price": parseFloat(req.body.price),
-        "quantity": parseInt(req.body.quantity),
-    };
-    if (req.file) {
-        comicBook.comicCover = req.file.amazingspiderman.jpeg;
-    }
-    else if (req.body.title) {
-        comicBook.title = req.body.title;
-    }
-    else if (req.body.universe) {
-        comicBook.universe = req.body.universe;
-    }
-    else if (req.body.year) {
-        comicBook.year = parseInt(req.body.year);
-    }
-    else if (req.body.description) {
-        comicBook.description = req.body.description;
-    }
-    else if (req.body.price) {
-        comicBook.price = parseFloat(req.body.price);
-    } 
-    else if (req.body.quantity) {
-        comicBook.quantity = parseInt(req.body.quantity);
-    }
+
+  app.post("/employee/update", (req, res) => {
+    data
+    .updateEmployee(req.body)
+    .then(()=>{
+        res.redirect("/employees");
+  })
+  .catch((err) => {
+    res.status(500).send("Unable to Update the Employee");
+  });
+});
+
+  app.post("/InventoryEntry", upload.single("comicCover"), (req, res) => {
+    data
+    .addComicBook(req.body)
+    .then(()=>{
+      res.redirect("/Dashboard"); 
+    })
+    .catch((err) => {
+        res.status(500).send("Unable to Add the Comic Book");
+    });
+});
+
+app.post("/comicBooks/update", (req, res) => {
+    data
+    .updateComicBook(req.body)
+    .then(()=>{
+    res.redirect("/Dashboard");
+  })
+  .catch((err) => {
+    res.status(500).send(err);
+  });
 });
 
 app.use((req, res) => {
