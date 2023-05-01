@@ -190,7 +190,93 @@ module.exports.addEmployee = function (employeeData) {
 
 };
 
-module.exports.addcomicBook = function (comicBookData) {
+module.exports.getEmployeeByNum = function (num) {
+    return new Promise(function (resolve, reject){
+        Employee.find({
+            employeeNum: num
+        })
+        .exec()
+        .then(function (data){
+            data = data.map((value) => value.toObject());
+            resolve(data[0]);
+        }).catch(() => {
+            reject("Query returned 0 results"); return;
+        });
+    });
+};
+
+module.exports.getEmployeesByStatus = function (status) {
+    return new Promise(function (resolve, reject){
+        Employee.find({
+            status: status
+    })
+    .exec()
+    .then(function (data){
+        data = data.map((value) => value.toObject());
+        resolve(data);
+    }).catch(() => {
+        reject("Query returned 0 results"); return;
+    });
+});
+};
+
+module.exports.getEmployeesByManager = function (manager) {
+    return new Promise(function (resolve, reject){
+        Employee.find({
+            employeeManagerNum: manager
+            
+        })
+        .exec()
+        .then(function (data) {
+            data = data.map((value) => value.toObject());
+            resolve(data);
+        }).catch(() => {
+            reject("Query returned 0 results"); return;
+        });
+    });
+};
+
+module.exports.getManagers = function () {
+    return new Promise(function (resolve, reject){
+        reject();
+    });
+};
+
+module.exports.updateEmployee = function (employeeData) {
+    return new Promise(function (resolve, reject){
+        
+        employeeData.isManager = (employeeData.isManager) ? true : false;
+
+        for (var prop in employeeData) {
+            if (employeeData[prop] == '')
+                employeeData[prop] = null;
+        }
+            Employee.updateOne({
+                employeeNum: employeeData.employeeNum 
+    }).exec()
+    .then(() => {
+        resolve();
+    }).catch((e) => {
+        reject("Unable to update employee"); return;
+    });
+});
+};
+
+module.exports.deleteEmployeeByNum = function (empNum) {
+    return new Promise(function (resolve, reject){
+        Employee.deleteOne({
+                employeeNum: empNum
+        })
+        .exec()
+        .then(function () {
+            resolve("Department deleted successfully");
+        }).catch((err) => {
+            reject("Unable to delete employee"); return;
+        });
+    });
+};
+
+module.exports.addComicBook = function (comicBookData) {
     return new Promise(function (resolve, reject){
       comicBookData.idNum = Math.floor(Math.random() * 10000);
       console.log(comicBookData);
@@ -206,6 +292,53 @@ module.exports.addcomicBook = function (comicBookData) {
         });  
     });
 
+};
+
+module.exports.getComicByNum = function (num) {
+    return new Promise(function (resolve, reject){
+        ComicBook.find({
+            idNum: num
+        })
+        .exec()
+        .then(function (data){
+            data = data.map((value) => value.toObject());
+            resolve(data[0]);
+        }).catch(() => {
+            reject("Query returned 0 results"); return;
+        });
+    });
+};
+
+module.exports.updateComicBook = function (comicBookData) {
+    return new Promise(function (resolve, reject){
+
+        for (var prop in comicBookData) {
+            if (comicBookData[prop] == '')
+                comicBookData[prop] = null;
+        }
+            ComicBook.updateOne({
+                idNum: comicBookData.idNum 
+    }).exec()
+    .then(() => {
+        resolve();
+    }).catch((e) => {
+        reject("Unable to update comic book"); return;
+    });
+});
+};
+
+module.exports.deleteComicByNum = function (comicNum) {
+    return new Promise(function (resolve, reject){
+        ComicBook.deleteOne({
+                idNum: comicNum
+        })
+        .exec()
+        .then(function () {
+            resolve("Comic deleted successfully");
+        }).catch((err) => {
+            reject("Unable to delete comic"); return;
+        });
+    });
 };
 // add orders to database? 
 //This needs revisited
