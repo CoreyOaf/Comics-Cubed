@@ -100,6 +100,16 @@ app.get("/checkOrder", (req,res) =>{
 app.get("/order", (req,res) =>{
     res.render("order", {layout: "dashboardlay"});
 });
+
+// app.get("/updateNews", (req,res) =>{
+//     if (req.query.status) {
+//         data.updateNewsData(req.query.status)
+
+//             );
+// });
+
+
+
 app.get("/employees", (req, res) => {
     if (req.query.status) {
          data
