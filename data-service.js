@@ -8,6 +8,7 @@ const fs = require("fs");
 let employees = [];
 let comicBooks = [];
 let orders = [];
+let newsletters = []; 
 
 module.exports.initialize = function () {
     return new Promise( (resolve, reject) => {
@@ -74,6 +75,7 @@ var orderSchema = new Schema({
     finalCost: Number,
     status: String,
 });
+
 
 var Employee = mongoose.model('employees', employeeSchema);
     //create a new Employee
@@ -378,3 +380,30 @@ module.exports.updateOrder = function (orderData) {
 
 
 //Needs delete order function - also the deleteOrder needs to be implemented in the udpateOrder? 
+
+
+// //Define Newsletter Schema
+// var newsletterSchema = new Schema({
+//     newsletterTitle: String,
+//     newsletterContents: String,
+// });
+
+// //create newsletter object in database in newsletters table/collection 
+// var NewsLetter = mongoose.model('newsletters', newsletterSchema);
+
+// //Save newsletters when added by owner 
+// NewsLetter.save().then(() => {
+//     //everything good
+//     alert("Newsletter updated!");
+// }).catch(err => {
+//     //error was caught
+//     alert("Newsletter unable to be updated.");
+// });
+    
+// //Display newest newsletter to user on the newsletter page. 
+// function displayNews() {
+//     var i = 0;
+//     i = newsletters.length; 
+//     //Display title at 
+
+// }
