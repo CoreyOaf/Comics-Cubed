@@ -13,7 +13,7 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 app.engine('.hbs', exphbs.engine({ 
     extname: '.hbs',
-    defaultLayout: "dashboardlay",
+    defaultLayout: 'dashboardlay',
     helpers: { 
         navLink: function(url, options){
             return '<li' + 
@@ -83,7 +83,9 @@ app.get("/Newsletter", (req,res) =>{
              res.render("newsletter", {layout: "newsletterlay",  message: err });
          });
 });
-
+app.get("/Marketplace", (req,res) =>{
+    res.render("marketplace", {layout: "marketplacelay"});
+});
 
 app.get("/Events", (req,res) =>{
     res.render("events", {layout: "eventslay"});
@@ -191,24 +193,24 @@ app.get("/employees", (req, res) => {
         .getComicByNum(req.query.idNum)
         .then((data) => {
             res.render(
-                "dashboard",
+                "comicBooks",
                 data.length > 0 ? {comicBooks: data } : {message: "No results by ID Num"}
             );
         })
         .catch((err) => {
-            res.render("dashboard", { message: "no results" });
+            res.render("comicBooks", { message: "no results" });
         });
      } else {
             data
             .getAllComicBooks()
             .then((data) => {
                 res.render(
-                    "dashboard", 
+                    "comicBooks", 
                     data.length > 0 ? { comicBooks: data } : { message: "No Comic Books found" }
                 );
             })
             .catch((err) => {
-                res.render("dashboard", { message: err });
+                res.render("comicBooks", { message: err });
             });
         }
     });
@@ -228,25 +230,25 @@ app.get("/order", (req, res) => {
 app.get("/employees/add", (req,res) => { 
     data.getAllEmployees().then(
         (data) => {
-            res.render("addEmployee", {employees: data}, {layout: "dashboardlay"});
+            res.render("addEmployee", {layout: "dashboardlay", employees: data});
         }
     ).catch((err) => {
-        res.render("addEmployee", {employees: []}, {layout: "dashboardlay"});
+        res.render("addEmployee", {layout: "dashboardlay", employees: []});
     }) 
 });
 app.get("/InventoryEntry", (req,res) => {
     data.getAllComicBooks().then((data)  =>{
-        res.render("inventory", {comicBooks: data}, {layout: "dashboardlay"});
+        res.render("addComicBook", {comicBooks: data});
     }).catch((err) => {
         //set department list to empty array
-            res.render("inventory", {comicBooks: []}, {layout: "dashboardlay"});
+            res.render("addComicBook", {comicBooks: []});
     });
 });
 
 
 app.get("/comicBooks/delete/:comicNum", (req, res) => {
     data
-    .deleteDepartmentById(req.params.comicNum)
+    .deleteComicByNum(req.params.comicNum)
     .then(() => {
         res.redirect("/Dashboard");
     })
@@ -255,6 +257,16 @@ app.get("/comicBooks/delete/:comicNum", (req, res) => {
     });
 });
 
+app.post("/employees/add", (req, res) => {
+    data
+    .addEmployee(req.body)
+    .then(()=>{
+      res.redirect("/employees"); 
+    })
+    .catch((err) => {
+        res.status(500).send("Unable to Add the Employee");
+    });
+  });
 
 
   app.post("/comicBooks/add", upload.single("comicCover"), (req, res) => {
