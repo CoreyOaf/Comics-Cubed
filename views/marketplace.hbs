@@ -9,14 +9,12 @@
         </div>
 
         <div id="row">
-        {{#each comicbooks}}
+        {{#each comicBooks}}
             <div class="item" data-price="{{price}}" data-title="{{title}}">
                 <img src="{{comicCover}}"  alt="Item 1"> 
                 <h2>{{comicbookTitle}}</h2>
-                <p>{{comicbookUniverse}}</p>
-                <p>{{comicbookYear}}</p>
-		        <p>{{comicbookDescription}}</p>
-		        <p class="price">Price: {{comicbookPrice}}</p> 
+                <p>{{comicbookYear}} {{comicbookUniverse}}<br/> Price: ${{comicbookPrice}}</p>
+		        <p>{{comicbookDescription}}</p> 
             </div>
             {{/each}}
         </div>
