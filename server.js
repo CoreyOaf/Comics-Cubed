@@ -63,7 +63,9 @@ app.use(function(req,res,next){
 function onHttpStart(){
     console.log("Express http server listening on: " + HTTP_PORT);
 }
-//Main pages
+
+/////////////////////Main pages////////////////////
+
 app.get("/", (req,res) =>{
     res.render("home", {layout: "homelay"});;
 });
@@ -79,21 +81,31 @@ app.get("/Events", (req,res) =>{
 app.get("/AboutUs", (req,res) =>{
     res.render("aboutus", {layout: "aboutuslay"});
 });
+
+
+//Are we keeping the cart? 
 app.get("/Cart", (req,res) =>{
     res.render("cart", {layout: "cartlay"});
 });
+
+//Do we still need this? 
 app.get("/EmployeeLogin", (req,res) =>{
     res.render("employeeLogin", {layout: "employeeLoginlay"});
 });
+
+//Where is this? 
 app.get("/InventoryEntry", (req,res) =>{
     res.render("addComicBook", {layout: "dashboardlay"});
 });
+
 app.get("/UpdateNews", (req,res) =>{
     res.render("updateNews", {layout: "updateNewslay"});
 });
 app.get("/Dashboard", (req,res) =>{
     res.render("dashboard", {layout: "dashboardlay"});
 });
+
+//If we get rid of cart we will also need to get rid of the next two. 
 app.get("/checkOrder", (req,res) =>{
     res.render("checkOrder", {layout: "dashboardlay"});
 });
@@ -101,14 +113,8 @@ app.get("/order", (req,res) =>{
     res.render("order", {layout: "dashboardlay"});
 });
 
-// app.get("/updateNews", (req,res) =>{
-//     if (req.query.status) {
-//         data.updateNewsData(req.query.status)
 
-//             );
-// });
-
-
+/////////////////Employees///////////////////////////////
 
 app.get("/employees", (req, res) => {
     if (req.query.status) {
@@ -160,7 +166,123 @@ app.get("/employees", (req, res) => {
          });
      }
  });
- app.get("/comicBooks", (req,res) => {
+
+//GET Pages
+app.get("/employees/add", (req,res) => { 
+    data.getAllEmployees().then(
+        (data) => {
+            res.render("addEmployee", {employees: data}, {layout: "dashboardlay"});
+        }
+    ).catch((err) => {
+        res.render("addEmployee", {employees: []}, {layout: "dashboardlay"});
+    }) 
+});
+
+// app.post("/employees/add", (req, res) => {
+    // res.render("addEmployee", {layout: "employeeslay"});
+    // data.addEmployee(req.body).then(()=>{
+    //   res.redirect("/employees"); 
+   // });
+//   });
+
+
+
+app.get("/employees/delete/:empNum", (req, res) => {
+    data
+    .deleteEmployeeByNum(req.params.empNum)
+    .then(() => {
+        res.redirect("/employees");
+    })
+    .catch((err) => {
+        res.status(500).send("Unable to Remove Employee / Employee Not Found");
+    });
+});
+
+
+
+//POST Pages
+app.post("/employees/add", (req, res) => {
+    data
+    .addEmployee(req.body)
+    .then(()=>{
+      res.redirect("/employees"); 
+    })
+    .catch((err) => {
+        res.status(500).send("Unable to Add the Employee");
+    });
+  });
+
+  app.post("/employee/update", (req, res) => {
+    data
+    .updateEmployee(req.body)
+    .then(()=>{
+        res.redirect("/employees");
+  })
+  .catch((err) => {
+    res.status(500).send("Unable to Update the Employee");
+  });
+});
+
+
+ 
+
+//////////////////Order///////////////////////////////////////
+
+
+app.get("/order", (req, res) => {
+    
+    if (req.query.status) {
+         data.getAllOrders(req.query.status).then((data) => {
+             res.render("order", {order:data});
+         }).catch((err) => {
+             res.render("order",{ message: "no results" });
+         });
+        }
+ });
+
+
+
+
+//////////////////InventoryEntry(Adding Comic Books)///////////////////////
+
+
+
+  app.post("/InventoryEntry", upload.single("comicCover"), (req, res) => {
+    data
+    .addComicBook(req.body)
+    .then(()=>{
+      res.redirect("/Dashboard"); 
+    })
+    .catch((err) => {
+        res.status(500).send("Unable to Add the Comic Book");
+    });
+});
+
+app.get("/InventoryEntry", (req,res) => {
+    data.getAllComicBooks().then((data)  =>{
+        res.render("inventory", {comicBooks: data}, {layout: "dashboardlay"});
+    }).catch((err) => {
+        //set department list to empty array
+            res.render("inventory", {comicBooks: []}, {layout: "dashboardlay"});
+    });
+});
+
+
+///////////////MarketPlace/////////////////////////////
+
+app.post("/comicBooks/add", (req, res) => {
+    data.addComicBook(req.body).then(()=>{
+      res.redirect("/comicBooks"); 
+    });
+  });
+
+  app.get("/comicBooks", (req,res) => {
+    data.getAllComicBooks().then((data)=>{
+        res.render("comicBooks",{comicBooks:data});
+    });
+});
+
+app.get("/comicBooks", (req,res) => {
     if (req.query.idNum) {
         data
         .getComicByNum(req.query.idNum)
@@ -187,46 +309,17 @@ app.get("/employees", (req, res) => {
             });
         }
     });
-//res.render('handlebarName', {layout: 'main',data: variables});
-//Get checkOrder.hbs for Owner... displays all orders
-app.get("/order", (req, res) => {
-    
-    if (req.query.status) {
-         data.getAllOrders(req.query.status).then((data) => {
-             res.render("order", {order:data});
-         }).catch((err) => {
-             res.render("order",{ message: "no results" });
-         });
-        }
- });
-//GET Pages
-app.get("/employees/add", (req,res) => { 
-    data.getAllEmployees().then(
-        (data) => {
-            res.render("addEmployee", {employees: data}, {layout: "dashboardlay"});
-        }
-    ).catch((err) => {
-        res.render("addEmployee", {employees: []}, {layout: "dashboardlay"});
-    }) 
-});
-app.get("/InventoryEntry", (req,res) => {
-    data.getAllComicBooks().then((data)  =>{
-        res.render("inventory", {comicBooks: data}, {layout: "dashboardlay"});
-    }).catch((err) => {
-        //set department list to empty array
-            res.render("inventory", {comicBooks: []}, {layout: "dashboardlay"});
-    });
-});
 
-app.get("/employees/delete/:empNum", (req, res) => {
+
+app.post("/comicBooks/update", (req, res) => {
     data
-    .deleteEmployeeByNum(req.params.empNum)
-    .then(() => {
-        res.redirect("/employees");
-    })
-    .catch((err) => {
-        res.status(500).send("Unable to Remove Employee / Employee Not Found");
-    });
+    .updateComicBook(req.body)
+    .then(()=>{
+    res.redirect("/Dashboard");
+  })
+  .catch((err) => {
+    res.status(500).send(err);
+  });
 });
 
 app.get("/comicBooks/delete/:comicNum", (req, res) => {
@@ -240,50 +333,22 @@ app.get("/comicBooks/delete/:comicNum", (req, res) => {
     });
 });
 
-//POST Pages
-app.post("/employees/add", (req, res) => {
-    data
-    .addEmployee(req.body)
-    .then(()=>{
-      res.redirect("/employees"); 
-    })
-    .catch((err) => {
-        res.status(500).send("Unable to Add the Employee");
-    });
-  });
+//////////////Newsletter//////////////////////
 
-  app.post("/employee/update", (req, res) => {
-    data
-    .updateEmployee(req.body)
-    .then(()=>{
-        res.redirect("/employees");
-  })
-  .catch((err) => {
-    res.status(500).send("Unable to Update the Employee");
-  });
-});
-
-  app.post("/InventoryEntry", upload.single("comicCover"), (req, res) => {
-    data
-    .addComicBook(req.body)
-    .then(()=>{
-      res.redirect("/Dashboard"); 
-    })
-    .catch((err) => {
-        res.status(500).send("Unable to Add the Comic Book");
+//The route to populate the newsletter 
+app.get("/newsletter", (req,res) => {
+    data.getNewsletter().then((data)=>{
+        res.render("newsletters",{newsletters:data});
     });
 });
 
-app.post("/comicBooks/update", (req, res) => {
-    data
-    .updateComicBook(req.body)
-    .then(()=>{
-    res.redirect("/Dashboard");
-  })
-  .catch((err) => {
-    res.status(500).send(err);
+//the route to add the newest newsletter to the database 
+app.post("/newsletters/add", (req, res) => {
+    data.addNewsletter(req.body).then(()=>{
+      res.redirect("/newsletters"); 
+    });
   });
-});
+
 
 app.use((req, res) => {
     res.status(404).send("Page Not Found");

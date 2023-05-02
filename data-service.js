@@ -1,15 +1,18 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 //connect to Shawns MongoDb Atlas Database
-mongoose.connect("mongodb+srv://oafc:EweXWr2PQE14m3uK@databasepractice.e3uyu0n.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://hahawort:b9UbScwQpgyIzthD@brumfielcluster.osrajis.mongodb.net/test", { useNewUrlParser: true, useUnifiedTopology: true });
 
 const fs = require("fs");
 
-let employees = [];
+//Empty starter arrays 
 let comicBooks = [];
-let orders = [];
 let newsletters = []; 
+let employees = [];
+let orders = [];
 
+
+//Do we need this if we are going to store everything in the database? 
 module.exports.initialize = function () {
     return new Promise( (resolve, reject) => {
         fs.readFile('./data/employees.json', (err, data) => {
@@ -33,9 +36,48 @@ module.exports.initialize = function () {
             orders = JSON.parse(data);
             resolve();
         });  
+        fs.readFile('./data/newsletter.json', (err, data) => {
+            if (err) {
+                reject(err); return;
+             }
+            orders = JSON.parse(data);
+            resolve();
+        });
         
     });
 }
+
+
+
+//Define Comic Book Schema
+var comicBookSchema = new Schema({
+    idNum: Number,
+    comicCover: String,
+    comicbookTitle: String,
+    comicbookUniverse: String,
+    comicbookYear: Number,
+    comicbookDescription: String,
+    comicbookPrice: Number,
+    quantity: Number,
+});
+
+//Define Newsletter Schema
+var newsletterSchema = new Schema({
+    newsDate: String,
+    newsDesc: String,
+});
+
+//Define Order Schema
+var orderSchema = new Schema({
+    orderNum: Number,
+    orderDate: String,
+    customerName: String,
+    customerEmail: Number,
+    customerPhone: String,
+    orderTitles: String,
+    finalCost: Number,
+    status: String,
+});
 
 //Define Employee Schema
 var employeeSchema = new Schema({
@@ -52,37 +94,11 @@ var employeeSchema = new Schema({
     hireDate: String,
 });
 
-//Define Comic Book Schema
-var comicBookSchema = new Schema({
-    idNum: Number,
-    comicCover: String,
-    comicbookTitle: String,
-    comicbookUniverse: String,
-    comicbookYear: Number,
-    comicbookDescription: String,
-    comicbookPrice: Number,
-    quantity: Number,
-});
-
-//Define Order Schema
-var orderSchema = new Schema({
-    orderNum: Number,
-    orderDate: String,
-    customerName: String,
-    customerEmail: Number,
-    customerPhone: String,
-    orderTitles: String,
-    finalCost: Number,
-    status: String,
-});
-
-//Define Newsletter Schema
-var newsletterSchema = new Schema({
-    newsDate: String,
-    newsDesc: String,
-});
-
+var ComicBook = mongoose.model('comicBooks', comicBookSchema);
+var Order = mongoose.model('customerOrders', orderSchema);
+var Newsletter = mongoose.model('newsletters', newsletterSchema);
 var Employee = mongoose.model('employees', employeeSchema);
+
     //create a new Employee
     var PeterParker = new Employee({
         employeeNum: 1,
@@ -101,7 +117,6 @@ var Employee = mongoose.model('employees', employeeSchema);
         hireDate: "April 11, 2023",
     });
 
-var ComicBook = mongoose.model('comicBooks', comicBookSchema);
 //create a new Comic Book
 var AmazingSpiderman = new ComicBook({
     idNum: 1,
@@ -117,7 +132,6 @@ var AmazingSpiderman = new ComicBook({
     quantity: 3,
 });
 
-var Order = mongoose.model('customerOrders', orderSchema);
 //Create test order
 var testOrder = new Order({ 
     orderNum: Math.random(),
@@ -130,7 +144,6 @@ var testOrder = new Order({
     status: "false",
 });
 
-var Newsletter = mongoose.model('newsletters', newsletterSchema);
 //create a new Newsletter
 var aprilNewsletter = new Newsletter({
     newsDate: "04/29/2023",
@@ -138,7 +151,29 @@ var aprilNewsletter = new Newsletter({
     
 });
 
+//////////////ComicBook Functions////////////////////////
 
+//Save the comic book 
+
+module.exports.addComicBook = function (comicBookData) {
+    return new Promise(function (resolve, reject){
+      comicBookData.idNum = Math.floor(Math.random() * 10000);
+      console.log(comicBookData);
+    for (var prop in comicBookData) {
+        if(comicBookData[prop] == '')
+            comicBookData[prop] = null;
+    }
+    
+    ComicBook.create(comicBookData).then(() => {
+        resolve();
+    }).catch((err) =>{
+        reject("Unable to create comic book"); return;
+        });  
+    });
+
+};
+
+//Display the comic book
 module.exports.getAllComicBooks = function(){
     return new Promise(function (resolve, reject){
         ComicBook.find({})
@@ -152,16 +187,81 @@ module.exports.getAllComicBooks = function(){
     });
 });
 }
-// return new Promise((resolve,reject)=>{
-//     if (comicBooks.length == 0) {
-//         reject("query returned 0 results"); return;
-//     }
-//     resolve(comicBooks);
-// })
-// }
-  
 
 
+//Other comic book functions found? 
+module.exports.getComicByNum = function (num) {
+    return new Promise(function (resolve, reject){
+        ComicBook.find({
+            idNum: num
+        })
+        .exec()
+        .then(function (data){
+            data = data.map((value) => value.toObject());
+            resolve(data[0]);
+        }).catch(() => {
+            reject("Query returned 0 results"); return;
+        });
+    });
+};
+
+module.exports.updateComicBook = function (comicBookData) {
+    return new Promise(function (resolve, reject){
+
+        for (var prop in comicBookData) {
+            if (comicBookData[prop] == '')
+                comicBookData[prop] = null;
+        }
+            ComicBook.updateOne({
+                idNum: comicBookData.idNum 
+    }).exec()
+    .then(() => {
+        resolve();
+    }).catch((e) => {
+        reject("Unable to update comic book"); return;
+    });
+});
+};
+
+module.exports.deleteComicByNum = function (comicNum) {
+    return new Promise(function (resolve, reject){
+        ComicBook.deleteOne({
+                idNum: comicNum
+        })
+        .exec()
+        .then(function () {
+            resolve("Comic deleted successfully");
+        }).catch((err) => {
+            reject("Unable to delete comic"); return;
+        });
+    });
+};
+
+
+//////////////////////////////////////////////////////////////
+
+module.exports.getNewsletter = function(){
+    return new Promise((resolve,reject)=>{
+        if (newsletters.length == 0) {
+            reject("query returned 0 results"); return;
+        }
+        else {
+            var i = newsletters.length; 
+        }
+        resolve(newsletters[i]);
+    })
+}
+
+module.exports.addNewsletter = function (newsletterData) {
+    return new Promise(function (resolve, reject) {
+        Newsletter.create(newsletterData).then(() => {
+            resolve();
+        }).catch((err) =>{
+            reject("Unable to create Newsletter"); return;
+            }); 
+    });
+
+};
 
 
 //get all orders 
@@ -239,6 +339,19 @@ module.exports.getEmployeesByManager = function (manager) {
     });
 };
 
+module.exports.getAllEmployees = function (manager) {
+    return new Promise(function (resolve, reject){
+        Employee.find()
+        .exec()
+        .then(function (data) {
+            data = data.map((value) => value.toObject());
+            resolve(data);
+        }).catch(() => {
+            reject("Query returned 0 results"); return;
+        });
+    });
+};
+
 module.exports.getManagers = function () {
     return new Promise(function (resolve, reject){
         reject();
@@ -279,70 +392,9 @@ module.exports.deleteEmployeeByNum = function (empNum) {
     });
 };
 
-module.exports.addComicBook = function (comicBookData) {
-    return new Promise(function (resolve, reject){
-      comicBookData.idNum = Math.floor(Math.random() * 10000);
-      console.log(comicBookData);
-    for (var prop in comicBookData) {
-        if(comicBookData[prop] == '')
-            comicBookData[prop] = null;
-    }
-    
-    ComicBook.create(comicBookData).then(() => {
-        resolve();
-    }).catch((err) =>{
-        reject("Unable to create comic book"); return;
-        });  
-    });
 
-};
 
-module.exports.getComicByNum = function (num) {
-    return new Promise(function (resolve, reject){
-        ComicBook.find({
-            idNum: num
-        })
-        .exec()
-        .then(function (data){
-            data = data.map((value) => value.toObject());
-            resolve(data[0]);
-        }).catch(() => {
-            reject("Query returned 0 results"); return;
-        });
-    });
-};
 
-module.exports.updateComicBook = function (comicBookData) {
-    return new Promise(function (resolve, reject){
-
-        for (var prop in comicBookData) {
-            if (comicBookData[prop] == '')
-                comicBookData[prop] = null;
-        }
-            ComicBook.updateOne({
-                idNum: comicBookData.idNum 
-    }).exec()
-    .then(() => {
-        resolve();
-    }).catch((e) => {
-        reject("Unable to update comic book"); return;
-    });
-});
-};
-
-module.exports.deleteComicByNum = function (comicNum) {
-    return new Promise(function (resolve, reject){
-        ComicBook.deleteOne({
-                idNum: comicNum
-        })
-        .exec()
-        .then(function () {
-            resolve("Comic deleted successfully");
-        }).catch((err) => {
-            reject("Unable to delete comic"); return;
-        });
-    });
-};
 // add orders to database? 
 //This needs revisited
 module.exports.addOrder = function (orderData) {
@@ -394,31 +446,3 @@ module.exports.addNewsletter = function (newsletterData) {
 };
 
 
-//Needs delete order function - also the deleteOrder needs to be implemented in the udpateOrder? 
-
-
-// //Define Newsletter Schema
-// var newsletterSchema = new Schema({
-//     newsletterTitle: String,
-//     newsletterContents: String,
-// });
-
-// //create newsletter object in database in newsletters table/collection 
-// var NewsLetter = mongoose.model('newsletters', newsletterSchema);
-
-// //Save newsletters when added by owner 
-// NewsLetter.save().then(() => {
-//     //everything good
-//     alert("Newsletter updated!");
-// }).catch(err => {
-//     //error was caught
-//     alert("Newsletter unable to be updated.");
-// });
-    
-// //Display newest newsletter to user on the newsletter page. 
-// function displayNews() {
-//     var i = 0;
-//     i = newsletters.length; 
-//     //Display title at 
-
-// }
