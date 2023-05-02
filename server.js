@@ -300,6 +300,17 @@ app.get("/dashboard/:idNum", (req, res) => {
     });
 });
 
+app.get("/employees/:employeeNum", (req, res) => {
+    data
+    .deleteEmployeeByNum(req.params.employeeNum)
+    .then(() => {
+        res.redirect("/Employees");
+    })
+    .catch((err) => {
+        res.render("employees", {message: "no results"})
+    });
+});
+
 
 app.post("/InventoryEntry/add", (req, res) => {
     data.addComicBook(req.body).then(()=>{
