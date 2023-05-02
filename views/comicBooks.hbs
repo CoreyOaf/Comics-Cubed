@@ -17,10 +17,10 @@
             </tr>
             </thead>
             <tbody>
-            {{#each comicbooks}}
+            {{#each comicBooks}}
                 <tr>
                     <td>{{_id}}</td>
-                    <td><a href="/comicBook/{{idNum}}">{{comicbookTitle}}</a></td>
+                    <td><a href="/comicBook/"{{comicbookTitle}}></a></td>
                     <td>{{comicbookUniverse}}</td>
                     <td>{{comicbookYear}}</td>
                     <td>{{comicbookDescription}}</td>
@@ -32,7 +32,7 @@
         </table>
         </div>
     </div>
-    {{#unless comicbooks}}
+    {{#unless comicBooks}}
     <div class="col-md-12 text-center">
             <strong>{{message}}</strong>
     </div>
