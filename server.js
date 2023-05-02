@@ -69,12 +69,22 @@ function onHttpStart(){
 app.get("/", (req,res) =>{
     res.render("home", {layout: "homelay"});;
 });
-app.get("/Marketplace", (req,res) =>{
-    res.render("marketplace", {layout: "marketplacelay"});;
-});
+
 app.get("/Newsletter", (req,res) =>{
-    res.render("newsletter", {layout: "newsletterlay"});
+        data
+         .getAllComicBooks()
+         .then((data) => {
+             res.render(
+                 "newsletter", 
+                 {layout: "newsletterlay", newsletters: data}
+             );
+         })
+         .catch((err) => {
+             res.render("newsletter", {layout: "newsletterlay",  message: err });
+         });
 });
+
+
 app.get("/Events", (req,res) =>{
     res.render("events", {layout: "eventslay"});
 });
@@ -88,10 +98,6 @@ app.get("/Cart", (req,res) =>{
     res.render("cart", {layout: "cartlay"});
 });
 
-//Do we still need this? 
-app.get("/EmployeeLogin", (req,res) =>{
-    res.render("employeeLogin", {layout: "employeeLoginlay"});
-});
 
 //Where is this? 
 app.get("/InventoryEntry", (req,res) =>{
@@ -102,7 +108,17 @@ app.get("/UpdateNews", (req,res) =>{
     res.render("updateNews", {layout: "updateNewslay"});
 });
 app.get("/Dashboard", (req,res) =>{
-    res.render("dashboard", {layout: "dashboardlay"});
+    data
+         .getAllComicBooks()
+         .then((data) => {
+             res.render(
+                 "dashboard", 
+                 {layout: "dashboardlay", comicBooks: data}
+             );
+         })
+         .catch((err) => {
+             res.render("dashboard", {layout: "dashboardlay",  message: err });
+         });
 });
 
 //If we get rid of cart we will also need to get rid of the next two. 
@@ -114,114 +130,7 @@ app.get("/order", (req,res) =>{
 });
 
 
-/////////////////Employees///////////////////////////////
 
-app.get("/employees", (req, res) => {
-    if (req.query.status) {
-         data
-         .getEmployeesByStatus(req.query.status)
-         .then((data) => {
-             res.render(
-                 "employees",
-                 data.length > 0 ? { employees: data } : {message: "No results by status"}
-             );
-         })
-         .catch((err) => {
-             res.render("employees", { message: "no results" });
-         });
-     } else if (req.query.department) {
-         data
-         .getEmployeesByDepartment(req.query.department)
-         .then((data) => {
-             res.render("employees", 
-             data.length > 0 ? { employees: data } : { message: "No results by department" }
-             );
-         })
-         .catch((err) => {
-             res.render("employees", {message: "no results"});
-         });
-     } else if (req.query.manager) {
-         data
-         .getEmployeesByManager(req.query.manager)
-         .then((data) => {
-             res.render(
-                 "employees",
-                 data.length > 0 ? { employees: data } : { message: "No results by manager" }
-             );
-         })
-         .catch((err) => {
-             res.render("employees", { message: "no results" });
-         });
-     } else {
-         data
-         .getAllEmployees()
-         .then((data) => {
-             res.render(
-                 "employees", 
-                 data.length > 0 ? { employees: data } : { message: "No Employees found" }
-             );
-         })
-         .catch((err) => {
-             res.render("employees", { message: err });
-         });
-     }
- });
-
-//GET Pages
-app.get("/employees/add", (req,res) => { 
-    data.getAllEmployees().then(
-        (data) => {
-            res.render("addEmployee", {employees: data}, {layout: "dashboardlay"});
-        }
-    ).catch((err) => {
-        res.render("addEmployee", {employees: []}, {layout: "dashboardlay"});
-    }) 
-});
-
-// app.post("/employees/add", (req, res) => {
-    // res.render("addEmployee", {layout: "employeeslay"});
-    // data.addEmployee(req.body).then(()=>{
-    //   res.redirect("/employees"); 
-   // });
-//   });
-
-
-
-app.get("/employees/delete/:empNum", (req, res) => {
-    data
-    .deleteEmployeeByNum(req.params.empNum)
-    .then(() => {
-        res.redirect("/employees");
-    })
-    .catch((err) => {
-        res.status(500).send("Unable to Remove Employee / Employee Not Found");
-    });
-});
-
-
-
-//POST Pages
-app.post("/employees/add", (req, res) => {
-    data
-    .addEmployee(req.body)
-    .then(()=>{
-      res.redirect("/employees"); 
-    })
-    .catch((err) => {
-        res.status(500).send("Unable to Add the Employee");
-    });
-  });
-
-  app.post("/employee/update", (req, res) => {
-    data
-    .updateEmployee(req.body)
-    .then(()=>{
-        res.redirect("/employees");
-  })
-  .catch((err) => {
-    res.status(500).send("Unable to Update the Employee");
-  });
-});
 
 
  
@@ -258,82 +167,57 @@ app.get("/order", (req, res) => {
     });
 });
 
-app.get("/InventoryEntry", (req,res) => {
-    data.getAllComicBooks().then((data)  =>{
-        res.render("inventory", {comicBooks: data}, {layout: "dashboardlay"});
+app.get("/dashboard/:idNum", (req, res) => {    
+    data
+    .deleteComicByNum(req.params.idNum).then((data) => {
+      res.redirect("/Dashboard");
     }).catch((err) => {
-        //set department list to empty array
-            res.render("inventory", {comicBooks: []}, {layout: "dashboardlay"});
+        res.render("dashboard",{message:"no results"});
     });
 });
 
 
 ///////////////MarketPlace/////////////////////////////
 
-app.post("/comicBooks/add", (req, res) => {
+app.get("/MarketPlace", (req,res) =>{
+    data
+         .getAllComicBooks()
+         .then((data) => {
+             res.render(
+                 "marketplace", 
+                 {layout: "marketplacelay", comicBooks: data}
+             );
+         })
+         .catch((err) => {
+             res.render("marketplace", {layout: "marketplacelay",  message: err });
+         });
+});
+
+
+app.post("/InventoryEntry/add", (req, res) => {
     data.addComicBook(req.body).then(()=>{
-      res.redirect("/comicBooks"); 
+      //res.redirect("/Dashboard"); 
+      res.redirect("/Dashboard"); 
     });
   });
 
-  app.get("/comicBooks", (req,res) => {
+  app.get("/InventoryEntry", (req,res) => {
     data.getAllComicBooks().then((data)=>{
-        res.render("comicBooks",{comicBooks:data});
+        res.render("dashboard",{comicBooks:data});
     });
 });
 
-app.get("/comicBooks", (req,res) => {
-    if (req.query.idNum) {
-        data
-        .getComicByNum(req.query.idNum)
-        .then((data) => {
-            res.render(
-                "dashboard",
-                data.length > 0 ? {comicBooks: data } : {message: "No results by ID Num"}
-            );
-        })
-        .catch((err) => {
-            res.render("dashboard", { message: "no results" });
-        });
-     } else {
-            data
-            .getAllComicBooks()
-            .then((data) => {
-                res.render(
-                    "dashboard", 
-                    data.length > 0 ? { comicBooks: data } : { message: "No Comic Books found" }
-                );
-            })
-            .catch((err) => {
-                res.render("dashboard", { message: err });
-            });
-        }
-    });
 
-
-app.post("/comicBooks/update", (req, res) => {
-    data
-    .updateComicBook(req.body)
-    .then(()=>{
-    res.redirect("/Dashboard");
-  })
-  .catch((err) => {
-    res.status(500).send(err);
-  });
-});
-
-app.get("/comicBooks/delete/:comicNum", (req, res) => {
-    data
-    .deleteDepartmentById(req.params.comicNum)
-    .then(() => {
-        res.redirect("/Dashboard");
-    })
-    .catch((err) => {
-        res.status(500).send("Unable to Remove Comic Book / Comic Book Not Found");
-    });
-});
 
 //////////////Newsletter//////////////////////
+
+app.get("/updateNews", (req, res) => {
+    data.getNewsletter(req.params.empNum).then((data) => {
+        res.render("newsletter", {newsletters: data});
+    }).catch((err) => {
+        res.render("newsletter",{message:"no results"});
+    });
+});
 
 //The route to populate the newsletter 
 app.get("/newsletter", (req,res) => {
@@ -345,7 +229,7 @@ app.get("/newsletter", (req,res) => {
 //the route to add the newest newsletter to the database 
 app.post("/newsletters/add", (req, res) => {
     data.addNewsletter(req.body).then(()=>{
-      res.redirect("/newsletters"); 
+      res.redirect("/newsletter"); 
     });
   });
 
