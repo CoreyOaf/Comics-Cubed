@@ -12,43 +12,6 @@ let employees = [];
 let orders = [];
 
 
-//Do we need this if we are going to store everything in the database? 
-module.exports.initialize = function () {
-    return new Promise( (resolve, reject) => {
-        fs.readFile('./data/employees.json', (err, data) => {
-            if (err) {
-                reject(err); return;
-            }
-
-            employees = JSON.parse(data);
-        });
-        fs.readFile('./data/comicBooks.json', (err, data) => {
-            if (err) {
-                reject(err); return;
-             }
-            comicBooks = JSON.parse(data);
-            resolve();
-        });
-        fs.readFile('./data/orders.json', (err, data) => {
-            if (err) {
-                reject(err); return;
-             }
-            orders = JSON.parse(data);
-            resolve();
-        });  
-        fs.readFile('./data/newsletter.json', (err, data) => {
-            if (err) {
-                reject(err); return;
-             }
-            orders = JSON.parse(data);
-            resolve();
-        });
-        
-    });
-}
-
-
-
 //Define Comic Book Schema
 var comicBookSchema = new Schema({
     idNum: Number,

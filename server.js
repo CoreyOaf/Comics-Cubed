@@ -84,9 +84,18 @@ app.get("/Newsletter", (req,res) =>{
          });
 });
 app.get("/Marketplace", (req,res) =>{
-    res.render("marketplace", {layout: "marketplacelay"});
-});
-
+    data
+    .getAllComicBooks()
+    .then((data) =>{
+        res.render(
+            "marketplace",
+            {layout: "marketplacelay", comicBooks: data}
+            );
+    })
+    .catch((err) => {
+        res.render("marketplace", {layout: "marketplacelay", message: err})
+    })
+    });
 app.get("/Events", (req,res) =>{
     res.render("events", {layout: "eventslay"});
 });
@@ -246,14 +255,14 @@ app.get("/InventoryEntry", (req,res) => {
 });
 
 
-app.get("/comicBooks/delete/:comicNum", (req, res) => {
+app.get("/comicBooks/:idNum", (req, res) => {
     data
-    .deleteComicByNum(req.params.comicNum)
+    .deleteComicByNum(req.params.idNum)
     .then(() => {
-        res.redirect("/Dashboard");
+        res.redirect("/comicBooks");
     })
     .catch((err) => {
-        res.status(500).send("Unable to Remove Comic Book / Comic Book Not Found");
+        res.render("comicBooks", {message: "no results"})
     });
 });
 
@@ -280,15 +289,15 @@ app.post("/employees/add", (req, res) => {
     });
 });
 
-app.get("/dashboard/:idNum", (req, res) => {    
+app.get("/dashboard/:idNum", (req, res) => {
     data
-    .updateComicBook(req.body)
-    .then(()=>{
-    res.redirect("/Dashboard");
-  })
-  .catch((err) => {
-    res.status(500).send(err);
-  });
+    .deleteComicByNum(req.params.idNum)
+    .then(() => {
+        res.redirect("/Dashboard");
+    })
+    .catch((err) => {
+        res.render("dashboard", {message: "no results"})
+    });
 });
 
 

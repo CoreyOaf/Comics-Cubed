@@ -20,12 +20,12 @@
             {{#each comicBooks}}
                 <tr>
                     <td>{{_id}}</td>
-                    <td><a href="/comicBook/"{{comicbookTitle}}></a></td>
+                    <td><a href="/comicBook/"></a>{{comicbookTitle}}</td>
                     <td>{{comicbookUniverse}}</td>
                     <td>{{comicbookYear}}</td>
                     <td>{{comicbookDescription}}</td>
                     <td>{{comicbookPrice}}</td>
-                    <td><a href="/comicBooks/delete/:comicNum{{idNum}}" class="btn btn-danger">Remove</a></td>
+                    <td><a href="/comicBooks/{{idNum}}" class="btn btn-danger">Remove</a></td>
                 </tr>
             {{/each}}
             </tbody>
