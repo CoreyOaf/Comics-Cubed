@@ -166,7 +166,7 @@ app.get("/employees", (req, res) => {
         .getComicByNum(req.query.idNum)
         .then((data) => {
             res.render(
-                "dashboard",
+                "comicBooks",
                 data.length > 0 ? {comicBooks: data } : {message: "No results by ID Num"}
             );
         })
@@ -178,12 +178,12 @@ app.get("/employees", (req, res) => {
             .getAllComicBooks()
             .then((data) => {
                 res.render(
-                    "dashboard", 
+                    "comicBooks", 
                     data.length > 0 ? { comicBooks: data } : { message: "No Comic Books found" }
                 );
             })
             .catch((err) => {
-                res.render("dashboard", { message: err });
+                res.render("comicBooks", { message: err });
             });
         }
     });
@@ -209,12 +209,13 @@ app.get("/employees/add", (req,res) => {
         res.render("addEmployee", {employees: []}, {layout: "dashboardlay"});
     }) 
 });
-app.get("/InventoryEntry", (req,res) => {
+
+app.get("/comicBooks/add", (req,res) => {
     data.getAllComicBooks().then((data)  =>{
-        res.render("inventory", {comicBooks: data}, {layout: "dashboardlay"});
+        res.render("addComicBook", {comicBooks: data}, {layout: "dashboardlay"});
     }).catch((err) => {
         //set department list to empty array
-            res.render("inventory", {comicBooks: []}, {layout: "dashboardlay"});
+            res.render("addComicBook", {comicBooks: []}, {layout: "dashboardlay"});
     });
 });
 
@@ -233,7 +234,7 @@ app.get("/comicBooks/delete/:comicNum", (req, res) => {
     data
     .deleteDepartmentById(req.params.comicNum)
     .then(() => {
-        res.redirect("/Dashboard");
+        res.redirect("/comicBooks");
     })
     .catch((err) => {
         res.status(500).send("Unable to Remove Comic Book / Comic Book Not Found");
@@ -263,11 +264,11 @@ app.post("/employees/add", (req, res) => {
   });
 });
 
-  app.post("/InventoryEntry", upload.single("comicCover"), (req, res) => {
+  app.post("/comicBooks/add", upload.single("comicCover"), (req, res) => {
     data
     .addComicBook(req.body)
     .then(()=>{
-      res.redirect("/Dashboard"); 
+      res.redirect("/comicBooks"); 
     })
     .catch((err) => {
         res.status(500).send("Unable to Add the Comic Book");
@@ -278,7 +279,7 @@ app.post("/comicBooks/update", (req, res) => {
     data
     .updateComicBook(req.body)
     .then(()=>{
-    res.redirect("/Dashboard");
+    res.redirect("/comicBooks");
   })
   .catch((err) => {
     res.status(500).send(err);
