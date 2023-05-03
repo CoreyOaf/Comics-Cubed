@@ -333,10 +333,12 @@ app.get("/UpdateNews", (req,res) =>{
 });
 
 app.post("/updateNews/add", (req, res) => {
+    data.deleteNewsletter().then(()=>{
     data
     .addNewsletter(req.body)
     .then(()=>{
       res.redirect("/Newsletter"); 
+    })
     })
     .catch((err) => {
         res.status(500).send("Unable to Add the Comic Book");

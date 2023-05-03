@@ -10,7 +10,8 @@ let comicBooks = [];
 let newsletters = []; 
 let employees = [];
 let orders = [];
-
+let currentNewsDate = "";
+let currentNewsDesc = "";
 
 //Define Comic Book Schema
 var comicBookSchema = new Schema({
@@ -375,6 +376,7 @@ module.exports.updateOrder = function (orderData) {
 
 //creating and adding Newsletters
 module.exports.addNewsletter = function (newsletterData) {
+    //deleteNewsletter();
     return new Promise(function (resolve, reject){
       newsletterData.newsNum = Math.floor(Math.random() * 10000);
       console.log(newsletterData);
@@ -382,6 +384,8 @@ module.exports.addNewsletter = function (newsletterData) {
         if(newsletterData[prop] == '')
             newsletterData[prop] = null;
     }
+    currentNewsDate= newsletterData.newsDate;
+    currentNewsDescc = newsletterData.newsDes;
 
     Newsletter.create(newsletterData).then(() => {
         resolve();
@@ -391,25 +395,23 @@ module.exports.addNewsletter = function (newsletterData) {
     });
 
 };
-// module.exports.addNewsletter = function (newsletterData) {
+
+module.exports.deleteNewsletter = function () {
+    return new Promise(function (resolve, reject){
+        Newsletter.deleteAll({})
+        .exec()
+        .then(function () {
+            resolve("Newsletter deleted successfully");
+        }).catch((err) => {
+            reject("Unable to delete newsletter"); return;
+        });
+    });
+};
+    
+// module.exports.getNewsletter = function(){
 //     return new Promise(function (resolve, reject) {
-//         Newsletter.create(newsletterData).then(() => {
-//             resolve();
-//         }).catch((err) =>{
-//             reject("Unable to create Newsletter"); return;
-//             }); 
-//     });
 
-// };
-
-module.exports.getNewsletter = function(){
-    return new Promise((resolve,reject)=>{
-        if (newsletters.length == 0) {
-            reject("query returned 0 results"); return;
-        }
-        else {
-            var i = newsletters.length; 
-        }
-        resolve(newsletters[i]);
-    })
-}
+//         newsDate = currentNewsDate;
+//         newsDesc = currentNewsDesc;
+//     })
+// }
