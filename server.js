@@ -276,7 +276,7 @@ app.post("/employees/add", (req, res) => {
   });
 
 
-  app.post("/comicBooks/add", upload.single("comicCover"), (req, res) => {
+  app.post("/comicBooks/add", upload.single("comicCover"), async(req, res) => {
     data
     .addComicBook(req.body)
     .then(()=>{

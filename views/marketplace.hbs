@@ -11,10 +11,10 @@
         <div id="row">
         {{#each comicBooks}}
             <div class="item" data-price="{{price}}" data-title="{{title}}">
-                <img src="./comic_covers/{{comicCover}}"  alt="Item 1"> 
+                <img src="./comic_covers/{{comicbookTitle}}.jpg"  alt="Item 1"> 
                 <h2>{{comicbookTitle}}</h2>
                 <p>{{comicbookYear}} {{comicbookUniverse}}<br/> Price: ${{comicbookPrice}}</p>
-		        <p>{{comicbookDescription}}</p> 
+		        <p>{{comicbookDescription}}</p>
             </div>
             {{/each}}
         </div>
