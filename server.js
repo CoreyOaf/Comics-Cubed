@@ -72,7 +72,7 @@ app.get("/", (req,res) =>{
 
 app.get("/Newsletter", (req,res) =>{
         data
-         .getAllComicBooks()
+         .getNewsletter()
          .then((data) => {
              res.render(
                  "newsletter", 
@@ -115,9 +115,7 @@ app.get("/InventoryEntry", (req,res) =>{
     res.render("addComicBook", {layout: "dashboardlay"});
 });
 
-app.get("/UpdateNews", (req,res) =>{
-    res.render("updateNews", {layout: "updateNewslay"});
-});
+
 app.get("/Dashboard", (req,res) =>{
     data
          .getAllComicBooks()
@@ -329,28 +327,21 @@ app.post("/InventoryEntry/add", (req, res) => {
 
 //////////////Newsletter//////////////////////
 
-app.get("/updateNews", (req, res) => {
-    data.getNewsletter(req.params.empNum).then((data) => {
-        res.render("newsletter", {newsletters: data});
-    }).catch((err) => {
-        res.render("newsletter",{message:"no results"});
-    });
+//Produces update newspage 
+app.get("/UpdateNews", (req,res) =>{
+    res.render("updateNews", {layout: "updateNewslay"});
 });
 
-//The route to populate the newsletter 
-app.get("/newsletter", (req,res) => {
-    data.getNewsletter().then((data)=>{
-        res.render("newsletters",{newsletters:data});
+app.post("/updateNews/add", (req, res) => {
+    data
+    .addNewsletter(req.body)
+    .then(()=>{
+      res.redirect("/Newsletter"); 
+    })
+    .catch((err) => {
+        res.status(500).send("Unable to Add the Comic Book");
     });
 });
-
-//the route to add the newest newsletter to the database 
-app.post("/newsletters/add", (req, res) => {
-    data.addNewsletter(req.body).then(()=>{
-      res.redirect("/newsletter"); 
-    });
-  });
-
 
 app.use((req, res) => {
     res.status(404).send("Page Not Found");

@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 //connect to Shawns MongoDb Atlas Database
-mongoose.connect("mongodb+srv://oafc:EweXWr2PQE14m3uK@databasepractice.e3uyu0n.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://hahawort:b9UbScwQpgyIzthD@brumfielcluster.osrajis.mongodb.net/test", { useNewUrlParser: true, useUnifiedTopology: true });
 
 const fs = require("fs");
 
@@ -26,6 +26,7 @@ var comicBookSchema = new Schema({
 
 //Define Newsletter Schema
 var newsletterSchema = new Schema({
+    newsNum: Number,
     newsDate: String,
     newsDesc: String,
 });
@@ -203,28 +204,6 @@ module.exports.deleteComicByNum = function (comicNum) {
 
 //////////////////////////////////////////////////////////////
 
-module.exports.getNewsletter = function(){
-    return new Promise((resolve,reject)=>{
-        if (newsletters.length == 0) {
-            reject("query returned 0 results"); return;
-        }
-        else {
-            var i = newsletters.length; 
-        }
-        resolve(newsletters[i]);
-    })
-}
-
-module.exports.addNewsletter = function (newsletterData) {
-    return new Promise(function (resolve, reject) {
-        Newsletter.create(newsletterData).then(() => {
-            resolve();
-        }).catch((err) =>{
-            reject("Unable to create Newsletter"); return;
-            }); 
-    });
-
-};
 
 
 //get all orders 
@@ -397,8 +376,13 @@ module.exports.updateOrder = function (orderData) {
 //creating and adding Newsletters
 module.exports.addNewsletter = function (newsletterData) {
     return new Promise(function (resolve, reject){
+      newsletterData.newsNum = Math.floor(Math.random() * 10000);
       console.log(newsletterData);
-    
+      for (var prop in newsletterData) {
+        if(newsletterData[prop] == '')
+            newsletterData[prop] = null;
+    }
+
     Newsletter.create(newsletterData).then(() => {
         resolve();
     }).catch((err) =>{
@@ -407,5 +391,25 @@ module.exports.addNewsletter = function (newsletterData) {
     });
 
 };
+// module.exports.addNewsletter = function (newsletterData) {
+//     return new Promise(function (resolve, reject) {
+//         Newsletter.create(newsletterData).then(() => {
+//             resolve();
+//         }).catch((err) =>{
+//             reject("Unable to create Newsletter"); return;
+//             }); 
+//     });
 
+// };
 
+module.exports.getNewsletter = function(){
+    return new Promise((resolve,reject)=>{
+        if (newsletters.length == 0) {
+            reject("query returned 0 results"); return;
+        }
+        else {
+            var i = newsletters.length; 
+        }
+        resolve(newsletters[i]);
+    })
+}
