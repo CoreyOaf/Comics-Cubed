@@ -37,14 +37,14 @@ app.set('view engine', '.hbs');
 // multer requires a few options to be setup to store files with file extensions
 // by default it won't store extensions for security reasons
 const storage = multer.diskStorage({
-    destination: "./public/images/uploaded",
-    filename: function (req, file, cb) {
-      // we write the filename as the current date down to the millisecond
-      // in a large web service this would possibly cause a problem if two people
-      // uploaded an image at the exact same time. A better way would be to use GUID's for filenames.
-      // this is a simple example.
-      cb(null, Date.now() + path.extname(file.originalname));
-    }
+    destination: (req, file, cb) => {
+        cb(null, "./public/comic_covers")
+    },
+
+    filename: (req, file, cb) => {
+        console.log(file)
+        cb(null, file.originalname)
+    },
   });
   
   // tell multer to use the diskStorage function for naming files instead of the default.
