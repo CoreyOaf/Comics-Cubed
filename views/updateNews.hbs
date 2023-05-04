@@ -3,12 +3,12 @@
 
 
     <form id="updateNewsForm" method="post" enctype="multipart/form-data" action="/updateNews/add">  
-        <div class="container" method = "POST">   
+        <div class="container" >   
             <label for="newsDate">Insert Updated Month:</label> 
-            <input type="text" id="newsDate" name="newsDate" value="{{newsletterData.newsDate}}"  required >
+            <input type="text" id="newsDate" name="newsDate" required >
             <br/>
             <label for="newsDesc">Insert Updated Newsletter:</label>    
-            <input type="text" id="newsDesc" name="newsDesc"  class= "updateLetter" value="{{newsletterData.newsDesc}}"  required> 
+            <input type="text" id="newsDesc" name="newsDesc"  class= "updateLetter" required> 
 
             <br/>
             <button type="submit">Update News</button>     
