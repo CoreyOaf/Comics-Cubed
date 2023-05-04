@@ -81,10 +81,10 @@ module.exports.addComicBook = function (comicBookData) {
     return new Promise(function (resolve, reject){
       comicBookData.idNum = Math.floor(Math.random() * 10000);
       console.log(comicBookData);
-    for (var prop in comicBookData) {
-        if(comicBookData[prop] == '')
-            comicBookData[prop] = null;
-    }
+    // for (var prop in comicBookData) {
+    //     if(comicBookData[prop] == '')
+    //         comicBookData[prop] = null;
+    // }
     
     ComicBook.create(comicBookData).then(() => {
         resolve();
@@ -293,14 +293,11 @@ module.exports.addNewsletter = function (newsletterData) {
     //deleteNewsletter();
     return new Promise(function (resolve, reject){
       newsletterData.newsNum = Math.floor(Math.random() * 10000);
+    //   newsletterData.newsDate = ;
+    //   newsletterData.newsDesc = ;
       console.log(newsletterData);
-      for (var prop in newsletterData) {
-        if(newsletterData[prop] == '')
-            newsletterData[prop] = null;
-    }
-    currentNewsDate= newsletterData.newsDate;
-    currentNewsDescc = newsletterData.newsDes;
 
+      
     Newsletter.create(newsletterData).then(() => {
         resolve();
     }).catch((err) =>{
@@ -312,7 +309,7 @@ module.exports.addNewsletter = function (newsletterData) {
 
 module.exports.deleteNewsletter = function () {
     return new Promise(function (resolve, reject){
-        Newsletter.deleteAll({})
+        Newsletter.deleteMany({})
         .exec()
         .then(function () {
             resolve("Newsletter deleted successfully");
@@ -322,13 +319,18 @@ module.exports.deleteNewsletter = function () {
     });
 };
     
-// module.exports.getNewsletter = function(){
-//     return new Promise(function (resolve, reject) {
-
-//         newsDate = currentNewsDate;
-//         newsDesc = currentNewsDesc;
-//     })
-// }
+module.exports.getNewsletter = function(){
+    return new Promise(function (resolve, reject){
+        Newsletter.find({})
+        .exec()
+        .then(function (data){
+            data = data.map((value) => value.toObject());
+            resolve(data[0]);
+        }).catch(() => {
+            reject("Query returned 0 results"); return;
+        });
+    });
+};
 
 
 
