@@ -104,10 +104,10 @@ app.get("/AboutUs", (req,res) =>{
 });
 
 
-//Are we keeping the cart? 
-app.get("/Cart", (req,res) =>{
-    res.render("cart", {layout: "cartlay"});
-});
+// //Are we keeping the cart? 
+// app.get("/Cart", (req,res) =>{
+//     res.render("cart", {layout: "cartlay"});
+// });
 
 
 app.get("/Dashboard", (req,res) =>{
@@ -124,13 +124,13 @@ app.get("/Dashboard", (req,res) =>{
          });
 });
 
-//If we get rid of cart we will also need to get rid of the next two. 
-app.get("/checkOrder", (req,res) =>{
-    res.render("checkOrder", {layout: "dashboardlay"});
-});
-app.get("/order", (req,res) =>{
-    res.render("order", {layout: "dashboardlay"});
-});
+// //If we get rid of cart we will also need to get rid of the next two. 
+// app.get("/checkOrder", (req,res) =>{
+//     res.render("checkOrder", {layout: "dashboardlay"});
+// });
+// app.get("/order", (req,res) =>{
+//     res.render("order", {layout: "dashboardlay"});
+// });
 
 
 
@@ -217,16 +217,16 @@ app.get("/employees", (req, res) => {
     });
 //res.render('handlebarName', {layout: 'main',data: variables});
 //Get checkOrder.hbs for Owner... displays all orders
-app.get("/order", (req, res) => {
+// app.get("/order", (req, res) => {
     
-    if (req.query.status) {
-         data.getAllOrders(req.query.status).then((data) => {
-             res.render("order", {order:data});
-         }).catch((err) => {
-             res.render("order",{ message: "no results" });
-         });
-        }
- });
+//     if (req.query.status) {
+//          data.getAllOrders(req.query.status).then((data) => {
+//              res.render("order", {order:data});
+//          }).catch((err) => {
+//              res.render      ("order",{ message: "no results" });
+//          });
+//         }
+//  });
 //GET Pages
 app.get("/employees/add", (req,res) => { 
     data.getAllEmployees().then(
