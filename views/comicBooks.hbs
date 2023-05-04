@@ -13,7 +13,7 @@
                 <th>Year</th>
                 <th>Description</th>
                 <th>Price</th>
-                <th></th>
+                <th>Quantity</th>
             </tr>
             </thead>
             <tbody>
@@ -25,6 +25,7 @@
                     <td>{{comicbookYear}}</td>
                     <td>{{comicbookDescription}}</td>
                     <td>{{comicbookPrice}}</td>
+                    <td style="text-align: center">{{quantity}}</td>
                     <td><a href="/comicBooks/{{idNum}}" class="btn btn-danger">Remove</a></td>
                 </tr>
             {{/each}}

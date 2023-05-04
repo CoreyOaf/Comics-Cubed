@@ -341,7 +341,7 @@ app.post("/updateNews/add", (req, res) => {
     })
     })
     .catch((err) => {
-        res.status(500).send("Unable to Add the Comic Book");
+        res.status(500).send("Unable to Add the Newsletter");
     });
 });
 
