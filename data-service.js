@@ -71,57 +71,7 @@ var ComicBook = mongoose.model('comicBooks', comicBookSchema);
 var Newsletter = mongoose.model('newsletters', newsletterSchema);
 var Employee = mongoose.model('employees', employeeSchema);
 
-//     //create a new Employee
-//     var PeterParker = new Employee({
-//         employeeNum: 1,
-//         firstName: "Peter",
-//         lastName: "Parker",
-//         email: "peterparker@mcu.com",
-//         SSN: "123-12-1234",
-//         addressStreet: "1234 Marvel Ave",
-//         addressCity: "New York City",
-//         addressState: "New York",
-//         addressPostal: "10001",
-//         maritalStatus: "Single",
-//         isManager: false,
-//         employeeManagerNum: 1,
-//         status: "Full Time",
-//         hireDate: "April 11, 2023",
-//     });
 
-// //create a new Comic Book
-// var AmazingSpiderman = new ComicBook({
-//     idNum: 1,
-//     comicCover: "./images/amazingspiderman.jpeg",
-//     comicbookTitle: "Amazing Fantasy #15",
-//     comicbookUniverse: "Marvel",
-//     comicbookYear: 1962,
-//     comicbookDescription: "The First Appearance of the Amazing Spider-Man! " + 
-//     "When young Peter Parker gains remarkable abilities from a radioactive spider, " +
-//     "he must step up and try to become a hero — while also dealing with the fantastic " + 
-//     "pressures of an everyday teenager! For with great power, there must also come great responsibility!",
-//     comicbookPrice: 4.95,
-//     quantity: 3,
-// });
-
-// //Create test order
-// var testOrder = new Order({ 
-//     orderNum: Math.random(),
-//     orderDate: "4/19/2023",
-//     customerName: "Mary Jane",
-//     customerEmail: "maryJane@gmail.com",
-//     customerPhone: (765)-398-2263,
-//     orderTitles: "Title1,Title2",
-//     finalCost: 20.22,
-//     status: "false",
-// });
-
-// //create a new Newsletter
-// var aprilNewsletter = new Newsletter({
-//     newsDate: "04/29/2023",
-//     newsDesc: "We are having a discount on all Batman comics this week.",
-    
-// });
 
 //////////////ComicBook Functions////////////////////////
 
