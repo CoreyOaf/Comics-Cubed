@@ -110,12 +110,6 @@ app.get("/Cart", (req,res) =>{
 });
 
 
-//Where is this? 
-app.get("/InventoryEntry", (req,res) =>{
-    res.render("addComicBook", {layout: "dashboardlay"});
-});
-
-
 app.get("/Dashboard", (req,res) =>{
     data
          .getAllComicBooks()
@@ -310,18 +304,7 @@ app.get("/employees/:employeeNum", (req, res) => {
 });
 
 
-app.post("/InventoryEntry/add", (req, res) => {
-    data.addComicBook(req.body).then(()=>{
-      //res.redirect("/Dashboard"); 
-      res.redirect("/Dashboard"); 
-    });
-  });
 
-  app.get("/InventoryEntry", (req,res) => {
-    data.getAllComicBooks().then((data)=>{
-        res.render("dashboard",{comicBooks:data});
-    });
-});
 
 
 
