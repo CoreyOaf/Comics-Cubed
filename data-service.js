@@ -1,10 +1,27 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
+//const GridFsStorage = require('gridfs-stream');
+const multer = require("multer");
 var Schema = mongoose.Schema;
 //connect to Shawns MongoDb Atlas Database
 mongoose.connect("mongodb+srv://oafc:EweXWr2PQE14m3uK@databasepractice.e3uyu0n.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
 
 const fs = require("fs");
 
+/* configure multer for file uploads
+const storage = new GridFsStorage({
+    db:
+      "mongodb+srv://oafc:EweXWr2PQE14m3uK@databasepractice.e3uyu0n.mongodb.net/test?retryWrites=true&w=majority",
+      options: { useNewUrlParser: true, useUnifiedTopology: true },
+    file: (req, file) => {
+      return {
+        filename: file.originalname,
+        bucketName: "comicCovers",
+      };
+    },
+  });
+
+
+*/
 //Empty starter arrays 
 let comicBooks = [];
 let newsletters = []; 
@@ -15,7 +32,10 @@ let orders = [];
 //Define Comic Book Schema
 var comicBookSchema = new Schema({
     idNum: Number,
-    comicCover: String,
+    comicCover: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "comicCovers.files",
+      },
     comicbookTitle: String,
     comicbookUniverse: String,
     comicbookYear: Number,
