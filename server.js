@@ -4,7 +4,6 @@ const data = require("./data-service.js");
 const bodyParser = require('body-parser');
 const fs = require("fs");
 const multer = require("multer");
-const GridFsStorage = require('gridfs-stream').GridFsStorage;
 const exphbs = require('express-handlebars');
 const app = express();
 
