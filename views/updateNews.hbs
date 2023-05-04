@@ -1,22 +1,17 @@
 <body>     
      <h1> Update Newsletter</h1>  
 
-     <div class="row">
-        <div class="col">
-            <a href="/Dashboard" class="btn" style="background-color: lawngreen; color: white;">Dashboard</a><br><br>
-        </div>
-     </div>
 
-    <form id="updateNews" >  
-        <div class="container" method = "POST">   
-            <label for="monthTitle">Insert Updated Month:</label> 
-            <input type="text" id="monthTitle" name="monthTitle" required >
+    <form id="updateNewsForm" method="post" enctype="multipart/form-data" action="/updateNews/add">  
+        <div class="container" >   
+            <label for="newsDate">Insert Updated Month:</label> 
+            <input type="text" id="newsDate" name="newsDate" required >
+            <br/>
+            <label for="newsDesc">Insert Updated Newsletter:</label>    
+            <input type="text" id="newsDesc" name="newsDesc"  class= "updateLetter" required> 
 
-            <label for="updateLetter">Insert Updated Newsletter:</label>    
-            <input type="text" id="updateLetter" name="updateLetter"  class= "updateLetter" required> 
-
-            
-            <button ><a href="/updateNews" >Update</a></button>     
+            <br/>
+            <button type="submit">Update News</button>     
         </div>   
     </form> 
 </body>

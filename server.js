@@ -71,7 +71,7 @@ app.get("/", (req,res) =>{
 
 app.get("/Newsletter", (req,res) =>{
         data
-         .getAllComicBooks()
+         .getNewsletter()
          .then((data) => {
              res.render(
                  "newsletter", 
@@ -103,20 +103,12 @@ app.get("/AboutUs", (req,res) =>{
 });
 
 
-//Are we keeping the cart? 
-app.get("/Cart", (req,res) =>{
-    res.render("cart", {layout: "cartlay"});
-});
+// //Are we keeping the cart? 
+// app.get("/Cart", (req,res) =>{
+//     res.render("cart", {layout: "cartlay"});
+// });
 
 
-//Where is this? 
-app.get("/InventoryEntry", (req,res) =>{
-    res.render("addComicBook", {layout: "dashboardlay"});
-});
-
-app.get("/UpdateNews", (req,res) =>{
-    res.render("updateNews", {layout: "updateNewslay"});
-});
 app.get("/Dashboard", (req,res) =>{
     data
          .getAllComicBooks()
@@ -131,13 +123,13 @@ app.get("/Dashboard", (req,res) =>{
          });
 });
 
-//If we get rid of cart we will also need to get rid of the next two. 
-app.get("/checkOrder", (req,res) =>{
-    res.render("checkOrder", {layout: "dashboardlay"});
-});
-app.get("/order", (req,res) =>{
-    res.render("order", {layout: "dashboardlay"});
-});
+// //If we get rid of cart we will also need to get rid of the next two. 
+// app.get("/checkOrder", (req,res) =>{
+//     res.render("checkOrder", {layout: "dashboardlay"});
+// });
+// app.get("/order", (req,res) =>{
+//     res.render("order", {layout: "dashboardlay"});
+// });
 
 
 
@@ -224,16 +216,16 @@ app.get("/employees", (req, res) => {
     });
 //res.render('handlebarName', {layout: 'main',data: variables});
 //Get checkOrder.hbs for Owner... displays all orders
-app.get("/order", (req, res) => {
+// app.get("/order", (req, res) => {
     
-    if (req.query.status) {
-         data.getAllOrders(req.query.status).then((data) => {
-             res.render("order", {order:data});
-         }).catch((err) => {
-             res.render("order",{ message: "no results" });
-         });
-        }
- });
+//     if (req.query.status) {
+//          data.getAllOrders(req.query.status).then((data) => {
+//              res.render("order", {order:data});
+//          }).catch((err) => {
+//              res.render      ("order",{ message: "no results" });
+//          });
+//         }
+//  });
 //GET Pages
 app.get("/employees/add", (req,res) => { 
     data.getAllEmployees().then(
@@ -277,7 +269,7 @@ app.post("/employees/add", (req, res) => {
   });
 
 
-  app.post("/comicBooks/add", upload.single("comicCover"), (req, res) => {
+  app.post("/comicBooks/add", upload.single("comicCover"), async(req, res) => {
     data
     .addComicBook(req.body)
     .then(()=>{
@@ -311,45 +303,29 @@ app.get("/employees/:employeeNum", (req, res) => {
 });
 
 
-app.post("/InventoryEntry/add", (req, res) => {
-    data.addComicBook(req.body).then(()=>{
-      //res.redirect("/Dashboard"); 
-      res.redirect("/Dashboard"); 
-    });
-  });
 
-  app.get("/InventoryEntry", (req,res) => {
-    data.getAllComicBooks().then((data)=>{
-        res.render("dashboard",{comicBooks:data});
-    });
-});
 
 
 
 //////////////Newsletter//////////////////////
 
-app.get("/updateNews", (req, res) => {
-    data.getNewsletter(req.params.empNum).then((data) => {
-        res.render("newsletter", {newsletters: data});
-    }).catch((err) => {
-        res.render("newsletter",{message:"no results"});
-    });
+//Produces update newspage 
+app.get("/UpdateNews", (req,res) =>{
+    res.render("updateNews", {layout: "updateNewslay"});
 });
 
-//The route to populate the newsletter 
-app.get("/newsletter", (req,res) => {
-    data.getNewsletter().then((data)=>{
-        res.render("newsletters",{newsletters:data});
+app.post("/updateNews/add", (req, res) => {
+    data.deleteNewsletter().then(()=>{
+    data
+    .addNewsletter(req.body)
+    .then(()=>{
+      res.redirect("/Newsletter"); 
+    })
+    })
+    .catch((err) => {
+        res.status(500).send("Unable to Add the Newsletter");
     });
 });
-
-//the route to add the newest newsletter to the database 
-app.post("/newsletters/add", (req, res) => {
-    data.addNewsletter(req.body).then(()=>{
-      res.redirect("/newsletter"); 
-    });
-  });
-
 
 app.use((req, res) => {
     res.status(404).send("Page Not Found");

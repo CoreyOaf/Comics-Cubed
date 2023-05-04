@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 var Schema = mongoose.Schema;
 //connect to Shawns MongoDb Atlas Database
-mongoose.connect("mongodb+srv://oafc:EweXWr2PQE14m3uK@databasepractice.e3uyu0n.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://hahawort:b9UbScwQpgyIzthD@brumfielcluster.osrajis.mongodb.net/test", { useNewUrlParser: true, useUnifiedTopology: true });
 
 const fs = require("fs");
 
@@ -26,8 +26,9 @@ const storage = new GridFsStorage({
 let comicBooks = [];
 let newsletters = []; 
 let employees = [];
-let orders = [];
 
+let currentNewsDate = "";
+let currentNewsDesc = "";
 
 //Define Comic Book Schema
 var comicBookSchema = new Schema({
@@ -46,20 +47,9 @@ var comicBookSchema = new Schema({
 
 //Define Newsletter Schema
 var newsletterSchema = new Schema({
+    newsNum: Number,
     newsDate: String,
     newsDesc: String,
-});
-
-//Define Order Schema
-var orderSchema = new Schema({
-    orderNum: Number,
-    orderDate: String,
-    customerName: String,
-    customerEmail: Number,
-    customerPhone: String,
-    orderTitles: String,
-    finalCost: Number,
-    status: String,
 });
 
 //Define Employee Schema
@@ -78,61 +68,60 @@ var employeeSchema = new Schema({
 });
 
 var ComicBook = mongoose.model('comicBooks', comicBookSchema);
-var Order = mongoose.model('customerOrders', orderSchema);
 var Newsletter = mongoose.model('newsletters', newsletterSchema);
 var Employee = mongoose.model('employees', employeeSchema);
 
-    //create a new Employee
-    var PeterParker = new Employee({
-        employeeNum: 1,
-        firstName: "Peter",
-        lastName: "Parker",
-        email: "peterparker@mcu.com",
-        SSN: "123-12-1234",
-        addressStreet: "1234 Marvel Ave",
-        addressCity: "New York City",
-        addressState: "New York",
-        addressPostal: "10001",
-        maritalStatus: "Single",
-        isManager: false,
-        employeeManagerNum: 1,
-        status: "Full Time",
-        hireDate: "April 11, 2023",
-    });
+//     //create a new Employee
+//     var PeterParker = new Employee({
+//         employeeNum: 1,
+//         firstName: "Peter",
+//         lastName: "Parker",
+//         email: "peterparker@mcu.com",
+//         SSN: "123-12-1234",
+//         addressStreet: "1234 Marvel Ave",
+//         addressCity: "New York City",
+//         addressState: "New York",
+//         addressPostal: "10001",
+//         maritalStatus: "Single",
+//         isManager: false,
+//         employeeManagerNum: 1,
+//         status: "Full Time",
+//         hireDate: "April 11, 2023",
+//     });
 
-//create a new Comic Book
-var AmazingSpiderman = new ComicBook({
-    idNum: 1,
-    comicCover: "./images/amazingspiderman.jpeg",
-    comicbookTitle: "Amazing Fantasy #15",
-    comicbookUniverse: "Marvel",
-    comicbookYear: 1962,
-    comicbookDescription: "The First Appearance of the Amazing Spider-Man! " + 
-    "When young Peter Parker gains remarkable abilities from a radioactive spider, " +
-    "he must step up and try to become a hero — while also dealing with the fantastic " + 
-    "pressures of an everyday teenager! For with great power, there must also come great responsibility!",
-    comicbookPrice: 4.95,
-    quantity: 3,
-});
+// //create a new Comic Book
+// var AmazingSpiderman = new ComicBook({
+//     idNum: 1,
+//     comicCover: "./images/amazingspiderman.jpeg",
+//     comicbookTitle: "Amazing Fantasy #15",
+//     comicbookUniverse: "Marvel",
+//     comicbookYear: 1962,
+//     comicbookDescription: "The First Appearance of the Amazing Spider-Man! " + 
+//     "When young Peter Parker gains remarkable abilities from a radioactive spider, " +
+//     "he must step up and try to become a hero — while also dealing with the fantastic " + 
+//     "pressures of an everyday teenager! For with great power, there must also come great responsibility!",
+//     comicbookPrice: 4.95,
+//     quantity: 3,
+// });
 
-//Create test order
-var testOrder = new Order({ 
-    orderNum: Math.random(),
-    orderDate: "4/19/2023",
-    customerName: "Mary Jane",
-    customerEmail: "maryJane@gmail.com",
-    customerPhone: (765)-398-2263,
-    orderTitles: "Title1,Title2",
-    finalCost: 20.22,
-    status: "false",
-});
+// //Create test order
+// var testOrder = new Order({ 
+//     orderNum: Math.random(),
+//     orderDate: "4/19/2023",
+//     customerName: "Mary Jane",
+//     customerEmail: "maryJane@gmail.com",
+//     customerPhone: (765)-398-2263,
+//     orderTitles: "Title1,Title2",
+//     finalCost: 20.22,
+//     status: "false",
+// });
 
-//create a new Newsletter
-var aprilNewsletter = new Newsletter({
-    newsDate: "04/29/2023",
-    newsDesc: "We are having a discount on all Batman comics this week.",
+// //create a new Newsletter
+// var aprilNewsletter = new Newsletter({
+//     newsDate: "04/29/2023",
+//     newsDesc: "We are having a discount on all Batman comics this week.",
     
-});
+// });
 
 //////////////ComicBook Functions////////////////////////
 
@@ -223,39 +212,9 @@ module.exports.deleteComicByNum = function (comicNum) {
 
 //////////////////////////////////////////////////////////////
 
-module.exports.getNewsletter = function(){
-    return new Promise((resolve,reject)=>{
-        if (newsletters.length == 0) {
-            reject("query returned 0 results"); return;
-        }
-        else {
-            var i = newsletters.length; 
-        }
-        resolve(newsletters[i]);
-    })
-}
-
-module.exports.addNewsletter = function (newsletterData) {
-    return new Promise(function (resolve, reject) {
-        Newsletter.create(newsletterData).then(() => {
-            resolve();
-        }).catch((err) =>{
-            reject("Unable to create Newsletter"); return;
-            }); 
-    });
-
-};
 
 
-//get all orders 
-module.exports.getAllOrders = function(){
-    return new Promise((resolve,reject)=>{
-        if (orders.length == 0) {
-            reject("query returned 0 results"); return;
-        }
-        resolve(orders);
-    })
-}
+
 
 module.exports.addEmployee = function (employeeData) {
     return new Promise(function (resolve, reject){
@@ -378,47 +337,20 @@ module.exports.deleteEmployeeByNum = function (empNum) {
 
 
 
-// add orders to database? 
-//This needs revisited
-module.exports.addOrder = function (orderData) {
-    return new Promise(function (resolve, reject){
-      orderData.orderNum = Math.floor(Math.random() * 10000);
-      console.log(orderData);
-    for (var prop in orderData) {
-        if(orderData[prop] == '')
-            orderData[prop] = null;
-    }
-    
-    Order.create(orderData).then(() => {
-        resolve();
-    }).catch((err) =>{
-        reject("Unable to create order"); return;
-        });  
-    });
-
-};
-
-//Update order as picked up and delete from data base? 
-//This needs revisited
-module.exports.updateOrder = function (orderData) {
-
-    orderData.status = (orderData.status) ? true : false;
-
-    return new Promise(function (resolve, reject) {
-        for(let i=0; i < orders.length; i++){
-            if(orders[i].orderNum == orderdata.orderNum){
-                orders[i] = orderData;
-            }
-        }
-        resolve();
-    });
-};
 
 //creating and adding Newsletters
 module.exports.addNewsletter = function (newsletterData) {
+    //deleteNewsletter();
     return new Promise(function (resolve, reject){
+      newsletterData.newsNum = Math.floor(Math.random() * 10000);
       console.log(newsletterData);
-    
+      for (var prop in newsletterData) {
+        if(newsletterData[prop] == '')
+            newsletterData[prop] = null;
+    }
+    currentNewsDate= newsletterData.newsDate;
+    currentNewsDescc = newsletterData.newsDes;
+
     Newsletter.create(newsletterData).then(() => {
         resolve();
     }).catch((err) =>{
@@ -428,4 +360,85 @@ module.exports.addNewsletter = function (newsletterData) {
 
 };
 
+module.exports.deleteNewsletter = function () {
+    return new Promise(function (resolve, reject){
+        Newsletter.deleteAll({})
+        .exec()
+        .then(function () {
+            resolve("Newsletter deleted successfully");
+        }).catch((err) => {
+            reject("Unable to delete newsletter"); return;
+        });
+    });
+};
+    
+// module.exports.getNewsletter = function(){
+//     return new Promise(function (resolve, reject) {
 
+//         newsDate = currentNewsDate;
+//         newsDesc = currentNewsDesc;
+//     })
+// }
+
+
+
+//////////////Future Potential Order Page Code: //////////////////////
+
+//let orders = [];
+
+// //Define Order Schema
+// var orderSchema = new Schema({
+//     orderNum: Number,
+//     orderDate: String,
+//     customerName: String,
+//     customerEmail: Number,
+//     customerPhone: String,
+//     orderTitles: String,
+//     finalCost: Number,
+//     status: String,
+// });
+
+
+//var Order = mongoose.model('customerOrders', orderSchema);
+
+// module.exports.updateOrder = function (orderData) {
+
+//     orderData.status = (orderData.status) ? true : false;
+
+//     return new Promise(function (resolve, reject) {
+//         for(let i=0; i < orders.length; i++){
+//             if(orders[i].orderNum == orderdata.orderNum){
+//                 orders[i] = orderData;
+//             }
+//         }
+//         resolve();
+//     });
+// };
+
+// module.exports.addOrder = function (orderData) {
+//     return new Promise(function (resolve, reject){
+//       orderData.orderNum = Math.floor(Math.random() * 10000);
+//       console.log(orderData);
+//     for (var prop in orderData) {
+//         if(orderData[prop] == '')
+//             orderData[prop] = null;
+//     }
+    
+//     Order.create(orderData).then(() => {
+//         resolve();
+//     }).catch((err) =>{
+//         reject("Unable to create order"); return;
+//         });  
+//     });
+
+// };
+
+// //get all orders 
+// module.exports.getAllOrders = function(){
+//     return new Promise((resolve,reject)=>{
+//         if (orders.length == 0) {
+//             reject("query returned 0 results"); return;
+//         }
+//         resolve(orders);
+//     })
+// }
