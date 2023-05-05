@@ -27,8 +27,6 @@ let comicBooks = [];
 let newsletters = []; 
 let employees = [];
 
-let currentNewsDate = "";
-let currentNewsDesc = "";
 
 //Define Comic Book Schema
 var comicBookSchema = new Schema({
@@ -73,6 +71,7 @@ var Employee = mongoose.model('employees', employeeSchema);
 
 
 
+
 //////////////ComicBook Functions////////////////////////
 
 //Save the comic book 
@@ -99,9 +98,9 @@ module.exports.addComicBook = function (comicBookData) {
 module.exports.getAllComicBooks = function(){
     return new Promise(function (resolve, reject){
         ComicBook.find({})
+        .sort({ comicbookTitle: 1 })
         .exec()
         .then(function (data){
-            console.log(data + "findData");
             data = data.map((value) => value.toObject());
             resolve(data);
     }).catch((err) => {
@@ -231,9 +230,10 @@ module.exports.getEmployeesByManager = function (manager) {
     });
 };
 
-module.exports.getAllEmployees = function (manager) {
+module.exports.getAllEmployees = function () {
     return new Promise(function (resolve, reject){
-        Employee.find()
+        Employee.find({})
+        .sort({ firstName: 1 })
         .exec()
         .then(function (data) {
             data = data.map((value) => value.toObject());
@@ -284,10 +284,6 @@ module.exports.deleteEmployeeByNum = function (empNum) {
     });
 };
 
-
-
-
-
 //creating and adding Newsletters
 module.exports.addNewsletter = function (newsletterData) {
     //deleteNewsletter();
@@ -295,7 +291,11 @@ module.exports.addNewsletter = function (newsletterData) {
       newsletterData.newsNum = Math.floor(Math.random() * 10000);
     //   newsletterData.newsDate = ;
     //   newsletterData.newsDesc = ;
+    //   newsletterData.newsDate = ;
+    //   newsletterData.newsDesc = ;
       console.log(newsletterData);
+
+      
 
       
     Newsletter.create(newsletterData).then(() => {
@@ -322,6 +322,22 @@ module.exports.deleteNewsletter = function () {
 module.exports.getNewsletter = function(){
     return new Promise(function (resolve, reject){
         Newsletter.find({})
+        .sort({ newsDate: -1 })
+        .exec()
+        .then(function (data) {
+            data = data.map((value) => value.toObject());
+            resolve(data);
+        }).catch(() => {
+            reject("Query returned 0 results"); return;
+        });
+    });
+};
+
+module.exports.getNewsletterByDate = function (string) {
+    return new Promise(function (resolve, reject){
+        Newsletter.find({
+            newsDate: string
+        })
         .exec()
         .then(function (data){
             data = data.map((value) => value.toObject());
@@ -332,7 +348,20 @@ module.exports.getNewsletter = function(){
     });
 };
 
-
+module.exports.getNewsletter = function (num) {
+    return new Promise(function (resolve, reject){
+        Newsletter.find({
+            newsNum: num
+        })
+        .exec()
+        .then(function (data){
+            data = data.map((value) => value.toObject());
+            resolve(data[0]);
+        }).catch(() => {
+            reject("Query returned 0 results"); return;
+        });
+    });
+};
 
 //////////////Future Potential Order Page Code: //////////////////////
 

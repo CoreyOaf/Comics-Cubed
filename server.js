@@ -70,7 +70,7 @@ app.get("/", (req,res) =>{
 
 app.get("/Newsletter", (req,res) =>{
         data
-         .getNewsletter()
+         .getAllNewsletters()
          .then((data) => {
              res.render(
                  "newsletter", 
@@ -202,6 +202,45 @@ app.get("/employees", (req, res) => {
         }
     });
 
+    app.get("/newsletters", (req,res) => {
+        if (req.query.newsDate) {
+            data
+            .getNewsletterByDate(req.query.newsDate)
+            .then((data) => {
+                res.render(
+                    "newsletters",
+                    data.length > 0 ? {newsletters: data } : {message: "No results by Date"}
+                );
+            })
+            .catch((err) => {
+                res.render("newsletters", { message: "no results" });
+            });
+         } else {
+                data
+                .getAllNewsletters()
+                .then((data) => {
+                    res.render(
+                        "newsletters", 
+                        data.length > 0 ? { newsletters: data } : { message: "No Newsletters found" }
+                    );
+                })
+                .catch((err) => {
+                    res.render("newsletters", { message: err });
+                });
+            }
+        });
+//res.render('handlebarName', {layout: 'main',data: variables});
+//Get checkOrder.hbs for Owner... displays all orders
+// app.get("/order", (req, res) => {
+    
+//     if (req.query.status) {
+//          data.getAllOrders(req.query.status).then((data) => {
+//              res.render("order", {order:data});
+//          }).catch((err) => {
+//              res.render      ("order",{ message: "no results" });
+//          });
+//         }
+//  });
 //GET Pages
 app.get("/employees/add", (req,res) => { 
     data.getAllEmployees().then(
@@ -295,8 +334,7 @@ app.post("/updateNews/add", (req, res) => {
     data
     .addNewsletter(req.body)
     .then(()=>{
-      res.redirect("/Newsletter"); 
-    })
+      res.redirect("/Newsletters"); 
     })
     .catch((err) => {
         res.status(500).send("Unable to Add the Newsletter");

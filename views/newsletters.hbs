@@ -1,0 +1,33 @@
+<div class="row">
+    
+    <div class="col-md-12">
+        <h2>Newsletters<a href="/UpdateNews" class="btn btn-success pull-right">Add New Newsletter</a></h2>
+        <hr />
+        <div class="table-responsive">
+        <table class="table ">
+            <thead>
+            <tr>
+                <th>News&nbsp;Num</th>
+                <th>News&nbsp;Date</th>
+                <th>News&nbsp;Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each newsletters}}
+                <tr>
+                    <td>{{_id}}</td>
+                    <td><a href="/newsletter/"></a>{{newsDate}}</td>
+                    <td>{{{newsDesc}}}</td>
+                    <td><a href="/newsletters/{{newsNum}}" class="btn btn-danger">Remove</a></td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+        </div>
+    </div>
+    {{#unless newsletters}}
+    <div class="col-md-12 text-center">
+            <strong>{{message}}</strong>
+    </div>
+    {{/unless}}
+</div>
